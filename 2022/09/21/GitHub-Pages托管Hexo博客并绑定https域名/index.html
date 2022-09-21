@@ -18,25 +18,27 @@
   <meta name="author" content="lc700x">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用oh my zsh来美化了Mac自带终端的界面，并安装了代码自动补全插件">
+    <meta name="description" content="记录一下搭建这个博客的主要部署过程，包括Hexo建站、GitHub托管、绑定域名、CDN加速等步骤。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac终端简单美化和增强方案">
-<meta property="og:url" content="https://cellport.top/2022/09/18/Mac%E7%BB%88%E7%AB%AF%E7%AE%80%E5%8D%95%E7%BE%8E%E5%8C%96%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:title" content="GitHub Pages托管Hexo博客并绑定https域名">
+<meta property="og:url" content="https://cellport.top/2022/09/21/GitHub-Pages%E6%89%98%E7%AE%A1Hexo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E7%BB%91%E5%AE%9Ahttps%E5%9F%9F%E5%90%8D/index.html">
 <meta property="og:site_name" content="学习中lc700x">
-<meta property="og:description" content="使用oh my zsh来美化了Mac自带终端的界面，并安装了代码自动补全插件">
+<meta property="og:description" content="记录一下搭建这个博客的主要部署过程，包括Hexo建站、GitHub托管、绑定域名、CDN加速等步骤。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cellport.top/img/2022-09-18/zsh.jpeg">
-<meta property="article:published_time" content="2022-09-18T12:38:11.000Z">
-<meta property="article:modified_time" content="2022-09-18T12:38:11.000Z">
+<meta property="og:image" content="https://cellport.top/img/2022-09-21/github_pages.jpeg">
+<meta property="article:published_time" content="2022-09-21T13:43:05.000Z">
+<meta property="article:modified_time" content="2022-09-21T13:43:05.000Z">
 <meta property="article:author" content="lc700x">
-<meta property="article:tag" content="Mac">
-<meta property="article:tag" content="ZSH">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Github">
+<meta property="article:tag" content="DNS">
+<meta property="article:tag" content="CDN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cellport.top/img/2022-09-18/zsh.jpeg">
+<meta name="twitter:image" content="https://cellport.top/img/2022-09-21/github_pages.jpeg">
   
   
   
-  <title>Mac终端简单美化和增强方案 - 学习中lc700x</title>
+  <title>GitHub Pages托管Hexo博客并绑定https域名 - 学习中lc700x</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +191,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Mac终端简单美化和增强方案"></span>
+            <span id="subtitle" data-typed-text="GitHub Pages托管Hexo博客并绑定https域名"></span>
           
         </div>
 
@@ -200,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-18 20:38" pubdate>
-          2022年9月18日
+        <time datetime="2022-09-21 21:43" pubdate>
+          2022年9月21日
         </time>
       </span>
     
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          941 字
+          1.4k 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          8 分钟
+          12 分钟
         
       </span>
     
@@ -261,36 +263,32 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mac终端简单美化和增强方案</h1>
+            <h1 style="display: none">GitHub Pages托管Hexo博客并绑定https域名</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>Mac默认的终端界面是白底黑字，非常单调，希望通过美化提高其颜值并突出代码指令的重点。</p>
-<h1 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h1><h2 id="1-安装oh-my-zsh"><a href="#1-安装oh-my-zsh" class="headerlink" title="1. 安装oh my zsh"></a>1. 安装oh my zsh</h2><p>打开Mac的终端<code>Terminal.app</code>，运行下面指令安装<code>oh my zsh</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure>
-<h2 id="2-更改oh-my-zsh相关配置"><a href="#2-更改oh-my-zsh相关配置" class="headerlink" title="2. 更改oh my zsh相关配置"></a>2. 更改<code>oh my zsh</code>相关配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nano ~/.zshrc<br></code></pre></td></tr></table></figure>
-<p>修改第11行的主题部分代码，选择主题<code>ys</code>：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">ZSH_THEME=<span class="hljs-string">&quot;ys&quot;</span><br></code></pre></td></tr></table></figure>
-<p>（可选：关闭自动更新）<br>修改第27行的更新选新部分代码，取消注释：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-built_in">zstyle</span> <span class="hljs-string">&#x27;:omz:update&#x27;</span> mode disabled<br></code></pre></td></tr></table></figure>
-<p><code>ctrl+x</code>保存，<code>y</code>并按<code>return/enter</code>确认退出</p>
-<h2 id="3-加载自定义终端主题更改终端的背景字体颜色"><a href="#3-加载自定义终端主题更改终端的背景字体颜色" class="headerlink" title="3. 加载自定义终端主题更改终端的背景字体颜色"></a>3. 加载自定义终端主题更改终端的背景字体颜色</h2><p>顶部菜单<code>Termninal - Preferences...</code><br><img src="/img/2022-09-18/menu.png" srcset="/img/loading.gif" lazyload><br>点击Profiles选项。<br><img src="/img/2022-09-18/profile.png" srcset="/img/loading.gif" lazyload><br>加载自定义预设<code>Beautify.terminal</code>，并设置为默认。<br><img src="/img/2022-09-18/import.png" srcset="/img/loading.gif" lazyload><br><img src="/img/2022-09-18/default.png" srcset="/img/loading.gif" lazyload></p>
-<p>自定义预设<code>Beautify.terminal</code>下载链接：<a target="_blank" rel="noopener" href="https://y81xl-my.sharepoint.com/:f:/g/personal/lc700x_y81xl_onmicrosoft_com/ElYpJcfPyhxPtnOLf1PeCAsBAXj4ADmPQ8IivywO6Y8GTQ?e=yboPd1">OneDrive</a></p>
-<h2 id="4-重启终端"><a href="#4-重启终端" class="headerlink" title="4. 重启终端"></a>4. 重启终端</h2><p>当退出终端重新打开后即可看到新设置好的美化版界面。<br><img src="/img/2022-09-18/window.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="5-安装代码自动补全插件"><a href="#5-安装代码自动补全插件" class="headerlink" title="5. 安装代码自动补全插件"></a>5. 安装代码自动补全插件</h2><p>通过git下载zsh-autosuggestions插件到 oh-my-zsh 的插件目录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="hljs-variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions<br></code></pre></td></tr></table></figure>
-<p>编辑oh my zsh配置文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">nano ~/.zshrc<br></code></pre></td></tr></table></figure>
-<p>在plugins&#x3D;(git) 这行，添加：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">plugins=(git zsh-autosuggestions)<br></code></pre></td></tr></table></figure>
-<p><img src="/img/2022-09-18/plugin.png" srcset="/img/loading.gif" lazyload><br>重启生效zsh配置。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.zshrc<br></code></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ohmyz.sh/">Oh My Zsh - a delightful &amp; open source framework for Zsh</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010391437/article/details/75126310">macOS 修改终端Terminal的颜色设置_米克米不克的博客</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cco.xyz/archives/668">如何关闭oh my zsh更新</a>
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://learnku.com/articles/53859">Mac 配置 oh-my-zsh 和命令行自动补全</a>
-<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                <h1 id="前期历程"><a href="#前期历程" class="headerlink" title="前期历程"></a>前期历程</h1><p>之前这个博客网站是基于中国大陆阿里云服务器搭建的，域名的备案也是前前后后花了很长时间，但是最后阿里云ECS部署的网站在国外的访问速度实在太慢，加载出来要好几秒。<br>刚好这个月一年的ECS服务到期了，就想着重新在新的服务器上托管原来的网页。看来看去开始想着国内访问也方便，就挂在Gitee上，结果等了3～4天的实名认证后才发现个人版用户没法绑定自己申请的域名。<br>最后还是感觉Github Pages托管的体验最好，直接可以绑定个人域名，虽然不知道国内访问是否流畅，我也加入了腾讯云送的CDN加速，希望能有用吧。</p>
+<h1 id="Hexo建站"><a href="#Hexo建站" class="headerlink" title="Hexo建站"></a>Hexo建站</h1><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><p>MacOS Monterey 12.5.1</p>
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><ol>
+<li>Git<br>建议通过<a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a>安装<a target="_blank" rel="noopener" href="https://git-scm.com/download/mac">Git</a>和<a target="_blank" rel="noopener" href="https://nodejs.org/">Node.js</a><br>若没有Homebrew，可打开Mac自带的Terminal通过下面指令安装<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Terminal">/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;<br></code></pre></td></tr></table></figure></li>
+<li>安装git：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Terminal">brew install git<br></code></pre></td></tr></table></figure></li>
+<li>安装Node.js<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Terminal">brew install node<br></code></pre></td></tr></table></figure></li>
+<li>安装Hexo<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Terminal">npm install -g hexo-cli<br></code></pre></td></tr></table></figure></li>
+<li>创建并进入博客文件夹<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Termial">mkdir ~/blog<br>cd ～/blog<br></code></pre></td></tr></table></figure></li>
+<li>开始写你的第一个博客<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Termial">hexo new &#x27;My first blog&#x27;<br></code></pre></td></tr></table></figure>
+输入指令后会生成一个对应博客名字的Markdown文件，就可以开始写博客了。<br>博客图片保存在<code>~/blog/source/img/</code>下的自定义位置即可。例如：<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs md">![](<span class="hljs-link">/img/your_image.jpg</span>)<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h2><p>Hexo支持多种主题，可以在Github上搜索想要的主题即可。我用的是还在不断维护更新的Fluid主题</p>
+<ol>
+<li>安装Fluid主题<br>在blog目录下运行：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Terminal">npm install --save hexo-theme-fluid<br></code></pre></td></tr></table></figure></li>
+<li>配置主题文件<br>打开Finder进入到用户文件夹下的<code>blog/themes/fluid/</code>文件夹，将主题文件夹里的<code>_config.yml</code>重命名为<code>_config.fluid.yml</code>，移动到<code>～/blog/</code>文件夹下</li>
+<li>修改Hexo配置<br>如下修改 Hexo 博客目录中的 <code>_config.yml</code>：<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span>  <span class="hljs-comment"># 指定主题</span><br><span class="hljs-attr">language:</span> <span class="hljs-string">zh-CN</span>  <span class="hljs-comment"># 指定语言，会影响主题显示的语言，按需修改</span><br></code></pre></td></tr></table></figure></li>
+<li>其他主题外观<br>编辑<code>_config.fluid.yml</code>即可，具体可参考<a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/guide/#%E5%85%B3%E4%BA%8E%E6%8C%87%E5%8D%97">Fluid主题配置指南</a></li>
+</ol>
+<h2 id="其他Hexo配置"><a href="#其他Hexo配置" class="headerlink" title="其他Hexo配置"></a>其他Hexo配置</h2><p>打开<code>_config.yml</code>，根据自己网页内容修改</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-comment"># Site</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">学习中lc700x</span> <span class="hljs-comment"># 页面左上角博客网页名字</span><br><span class="hljs-attr">author:</span> <span class="hljs-string">lc700x</span> <span class="hljs-comment"># 博客作者</span><br><br><span class="hljs-comment"># URL</span><br><span class="hljs-attr">url:</span> <span class="hljs-string">https://cellport.top</span> <span class="hljs-comment"># 改为自己的域名</span><br><br><span class="hljs-comment"># Deployment</span><br><span class="hljs-comment">## Docs: https://hexo.io/docs/one-command-deployment</span><br><span class="hljs-attr">deploy:</span> <span class="hljs-comment"># 部署到GitHub Pages对应分支的参数</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/lc700x/lc700x.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span><br></code></pre></td></tr></table></figure>
+<h1 id="Github托管"><a href="#Github托管" class="headerlink" title="Github托管"></a>Github托管</h1><h1 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h1><h1 id="CDN加速"><a href="#CDN加速" class="headerlink" title="CDN加速"></a>CDN加速</h1>
                 
               </div>
             
@@ -323,9 +321,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Mac/">#Mac</a>
+        <a href="/tags/Hexo/">#Hexo</a>
       
-        <a href="/tags/ZSH/">#ZSH</a>
+        <a href="/tags/Github/">#Github</a>
+      
+        <a href="/tags/DNS/">#DNS</a>
+      
+        <a href="/tags/CDN/">#CDN</a>
       
     </div>
   
@@ -337,8 +339,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Mac终端简单美化和增强方案</div>
-      <div>https://cellport.top/2022/09/18/Mac终端简单美化方案/</div>
+      <div>GitHub Pages托管Hexo博客并绑定https域名</div>
+      <div>https://cellport.top/2022/09/21/GitHub-Pages托管Hexo博客并绑定https域名/</div>
     </div>
     <div class="license-meta">
       
@@ -350,7 +352,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月18日</div>
+          <div>2022年9月21日</div>
         </div>
       
       
@@ -380,18 +382,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/21/GitHub-Pages%E6%89%98%E7%AE%A1Hexo%E5%8D%9A%E5%AE%A2%E5%B9%B6%E7%BB%91%E5%AE%9Ahttps%E5%9F%9F%E5%90%8D/" title="GitHub Pages托管Hexo博客并绑定https域名">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">GitHub Pages托管Hexo博客并绑定https域名</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/18/Hexo%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8sh%E8%84%9A%E6%9C%AC/" title="Hexo博客自动sh脚本">
-                        <span class="hidden-mobile">Hexo博客自动sh脚本</span>
+                      <a href="/2022/09/18/Mac%E7%BB%88%E7%AB%AF%E7%AE%80%E5%8D%95%E7%BE%8E%E5%8C%96%E6%96%B9%E6%A1%88/" title="Mac终端简单美化和增强方案">
+                        <span class="hidden-mobile">Mac终端简单美化和增强方案</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
