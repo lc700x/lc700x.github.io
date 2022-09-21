@@ -18,25 +18,26 @@
   <meta name="author" content="lc700x">
   <meta name="keywords" content="">
   
-    <meta name="description" content="用sh写了一个更新博客的自动化脚本">
+    <meta name="description" content="hexo博客中Latex公式提交会有报错expected variable end，通过替换连续大括号解决">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo博客自动sh脚本">
-<meta property="og:url" content="https://cellport.top/2022/09/18/Hexo%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8sh%E8%84%9A%E6%9C%AC/index.html">
+<meta property="og:title" content="解决hexo中Latex报错的问题:expected variable end">
+<meta property="og:url" content="https://cellport.top/2022/08/06/%E8%A7%A3%E5%86%B3hexo%E4%B8%ADLatex%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98-expected-variable-end/index.html">
 <meta property="og:site_name" content="学习中lc700x">
-<meta property="og:description" content="用sh写了一个更新博客的自动化脚本">
+<meta property="og:description" content="hexo博客中Latex公式提交会有报错expected variable end，通过替换连续大括号解决">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cellport.top/img/2022-09-18/sh.png">
-<meta property="article:published_time" content="2022-09-18T10:35:12.000Z">
-<meta property="article:modified_time" content="2022-09-18T10:35:12.000Z">
+<meta property="og:image" content="https://cellport.top/img/2022-08-06/hexo.png">
+<meta property="article:published_time" content="2022-08-06T05:44:51.000Z">
+<meta property="article:modified_time" content="2022-08-06T05:44:51.000Z">
 <meta property="article:author" content="lc700x">
 <meta property="article:tag" content="Hexo">
-<meta property="article:tag" content="sh">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="Latex">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cellport.top/img/2022-09-18/sh.png">
+<meta name="twitter:image" content="https://cellport.top/img/2022-08-06/hexo.png">
   
   
   
-  <title>Hexo博客自动sh脚本 - 学习中lc700x</title>
+  <title>解决hexo中Latex报错的问题:expected variable end - 学习中lc700x</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +190,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hexo博客自动sh脚本"></span>
+            <span id="subtitle" data-typed-text="解决hexo中Latex报错的问题:expected variable end"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-09-18 18:35" pubdate>
-          2022年9月18日
+        <time datetime="2022-08-06 13:44" pubdate>
+          2022年8月6日
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          440 字
+          1k 字
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -261,26 +262,19 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hexo博客自动sh脚本</h1>
+            <h1 style="display: none">解决hexo中Latex报错的问题:expected variable end</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>Hexo搭建博客后，每次写完博客文章，基本需要经过四步：清理，生成，预览，上传</p>
-<ol>
-<li>清楚缓存和静态文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo clean<br></code></pre></td></tr></table></figure></li>
-<li>生成网页静态文件<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo generate<br></code></pre></td></tr></table></figure>
-或者简写为：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo g<br></code></pre></td></tr></table></figure></li>
-<li>启动本地服务器<code>localhost</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo server<br></code></pre></td></tr></table></figure>
-或者简写为：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo s<br></code></pre></td></tr></table></figure></li>
-<li>上传部署到服务器<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo deploy<br></code></pre></td></tr></table></figure>
-或者简写为：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo d<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>sh脚本中按顺序执行前3步，第4步是否执行根据第3步的预览本地页面来判断：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-comment"># Hexo清理，生成，启用</span><br>hexo clean<br>hexo g<br>hexo s<br><br><span class="hljs-comment"># 询问语句</span><br><span class="hljs-built_in">read</span> -r -p <span class="hljs-string">&quot;Continue to deploy to server? [Y/n] &quot;</span> input<br><span class="hljs-keyword">case</span> <span class="hljs-variable">$input</span> <span class="hljs-keyword">in</span><br>    [yY][eE][sS]|[yY])<br>		hexo d<br>		;;<br><br>    [nN][oO]|[nN])<br>		<span class="hljs-built_in">exit</span> 1<br>		;;<br><span class="hljs-keyword">esac</span> <span class="hljs-comment">#退出</span><br></code></pre></td></tr></table></figure>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands.html#server">Hexo指令</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/liyyzz33/article/details/93497802">shell脚本–提示确认（Y&#x2F;N，YES&#x2F;NO）å</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                <h1 id="错误出现"><a href="#错误出现" class="headerlink" title="错误出现"></a>错误出现</h1><p>在提交CS229学习笔记的时候，hexo出现了以下错误</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">err: Error [Nunjucks Error]: _posts/CS229（Machine Learning）学习笔记.md [Line 80, Column 32] expected variable end<br>      =====               Context Dump               =====<br>      === (line number probably different from <span class="hljs-built_in">source</span>) ===<br>    75 | &lt;p&gt;$$&lt;br&gt;<br>    76 | \min_&#123;w_1,w_2,…,b&#125;J(w_1,w_2,…,b)&lt;br&gt;<br>    77 | $$&lt;/p&gt;<br>    78 | &lt;h1&gt;梯度下降 Gradient descent&lt;/h1&gt;<br>    79 | &lt;p&gt;$$&lt;br&gt;<br>    80 | b=b-α&#123;\frac&#123;\partial&#125;&#123;&#123;\partial&#125;b&#125;J(w,b)&#125;<br>    81 | $$<br>    82 |<br>    83 | **Learning Rate:** $α$<br>    84 | **Derivative:** $\frac&#123;\partial&#125;&#123;&#123;\partial&#125;w&#125;J(w,b)$<br>      =====             Context Dump Ends            =====<br>      at formatNunjucksError (F:\blog\node_modules\hexo\lib\extend\tag.js:171:13)<br></code></pre></td></tr></table></figure>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>后来搜索相关资料，需要在公式中重复的大括号<code>&#123;&#123;`或`&#125;&#125;</code>中间添加空格才行。<br>例如：</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">b=b-α&#123;<span class="hljs-keyword">\frac</span>&#123;<span class="hljs-keyword">\partial</span>&#125;&#123;&#123;<span class="hljs-keyword">\partial</span>&#125;b&#125;J(w,b)&#125;<br></code></pre></td></tr></table></figure>
+<p>需要更改为</p>
+<figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs latex">b=b-α&#123;<span class="hljs-keyword">\frac</span>&#123;<span class="hljs-keyword">\partial</span>&#125;&#123; &#123;<span class="hljs-keyword">\partial</span>&#125;b&#125;J(w,b)&#125;<br></code></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可以在写好博客的Markdown之后用全局替换掉所有的大括号<code>&#123;&#123;`或`&#125;&#125;</code>位<code>&#123; &#123;</code>或<code>&#125; &#125;</code>，再在hexo中提交<br><img src="/img/2022-08-06/hexo_latex.png" srcset="/img/loading.gif" lazyload></p>
+
                 
               </div>
             
@@ -315,7 +309,9 @@
       
         <a href="/tags/Hexo/">#Hexo</a>
       
-        <a href="/tags/sh/">#sh</a>
+        <a href="/tags/Markdown/">#Markdown</a>
+      
+        <a href="/tags/Latex/">#Latex</a>
       
     </div>
   
@@ -327,8 +323,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hexo博客自动sh脚本</div>
-      <div>https://cellport.top/2022/09/18/Hexo博客自动sh脚本/</div>
+      <div>解决hexo中Latex报错的问题:expected variable end</div>
+      <div>https://cellport.top/2022/08/06/解决hexo中Latex报错的问题-expected-variable-end/</div>
     </div>
     <div class="license-meta">
       
@@ -340,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年9月18日</div>
+          <div>2022年8月6日</div>
         </div>
       
       
@@ -370,9 +366,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/18/Mac%E7%BB%88%E7%AB%AF%E7%AE%80%E5%8D%95%E7%BE%8E%E5%8C%96%E6%96%B9%E6%A1%88/" title="Mac终端简单美化和增强方案">
+                      <a href="/2022/09/18/Hexo%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8sh%E8%84%9A%E6%9C%AC/" title="Hexo博客自动sh脚本">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mac终端简单美化和增强方案</span>
+                        <span class="hidden-mobile">Hexo博客自动sh脚本</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -380,8 +376,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/06/%E8%A7%A3%E5%86%B3hexo%E4%B8%ADLatex%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98-expected-variable-end/" title="解决hexo中Latex报错的问题:expected variable end">
-                        <span class="hidden-mobile">解决hexo中Latex报错的问题:expected variable end</span>
+                      <a href="/2022/08/06/json%E6%A0%87%E8%AE%B0%E6%96%87%E4%BB%B6%E6%89%B9%E9%87%8F%E8%BD%AC%E5%8C%96%E9%BB%91%E7%99%BDmask/" title="json标记文件批量转化黑白mask">
+                        <span class="hidden-mobile">json标记文件批量转化黑白mask</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
