@@ -8,9 +8,23 @@
     <link href="/2022/10/16/%E8%A7%A3%E5%86%B3Office%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5%E5%87%BA%E7%8E%B0TPM%E9%94%99%E8%AF%AF%EF%BC%88800090016%EF%BC%89/"/>
     <url>/2022/10/16/%E8%A7%A3%E5%86%B3Office%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5%E5%87%BA%E7%8E%B0TPM%E9%94%99%E8%AF%AF%EF%BC%88800090016%EF%BC%89/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h1 id="错误出现"><a href="#错误出现" class="headerlink" title="错误出现"></a>错误出现</h1><p>把旧电脑硬盘直接安装到新的主板上，想不重装系统保持原有的软件和文件，结果发现第一次登录时 <code>Windows 10</code>的PIN失效了，需要重新登录账户重制密码。进入系统后，<code>Windows 10</code>是激活的，但是<code>Office 365</code>无法登录激活，用包含许可证的账户登录，不会激活成功，还是会提示再登录，有时候弹出<code>Your Computer&#39;s Trusted Platform Module has malfunctioned（80090016）</code>。  </p><h1 id="解决日志"><a href="#解决日志" class="headerlink" title="解决日志"></a>解决日志</h1><ol><li>开始时卸载重新安装<code>Office</code>，无效。</li><li>根据微软官方的清除TPM缓存的<a href="https://learn.microsoft.com/en-us/office/troubleshoot/activation/tpm-malfunctioned">操作</a>，登录PIN又需要重置，对<code>Office</code>激活还是无效。</li><li>也尝试了删除账户登录信息的NGC文件夹（<code>C:\Windows\ServiceProfiles\LocalService\AppData\Local\Microsoft\NGC</code>），无效</li><li>最后尝试删除AAD.BrokerPlugin文件夹才解决</li></ol><h1 id="最终方案"><a href="#最终方案" class="headerlink" title="最终方案"></a>最终方案</h1><h2 id="删除AAD-BrokerPlugin文件夹"><a href="#删除AAD-BrokerPlugin文件夹" class="headerlink" title="删除AAD.BrokerPlugin文件夹"></a>删除AAD.BrokerPlugin文件夹</h2><p>在资源管理器输入<code>C:\Users\%username%\AppData\Local\Packages</code>，找到<code>Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy</code>文件夹。<br><img src="/../img/2022-10-16/BrokerPlugin.png"></p><h2 id="更改目标文件夹权限"><a href="#更改目标文件夹权限" class="headerlink" title="更改目标文件夹权限"></a>更改目标文件夹权限</h2><p>因为权限问题，无法直接删除文件夹，需要更改文件夹所有权，才能删除。</p><ol><li>右键文件夹<code>属性Properties</code>，<code>安全Security</code>选项卡，点击<code>高级Advanced</code><br><img src="/../img/2022-10-16/Advanced.png"></li><li>更改文件夹所有者<br>点击<code>更改Change</code>，在<code>Check Names</code>左边输入<code>Everyone</code>，点击<code>OK</code>确认<br><img src="/../img/2022-10-16/Owner.png"><br><img src="/../img/2022-10-16/Everyone.png"><br>再勾选<code>Replace onwer in subcontainers and objects. 替换所有子文件夹的所有者</code>，并确认<br><img src="/../img/2022-10-16/Replace.png"></li><li>更改<code>Everyone</code>用户的权限<br><img src="/../img/2022-10-16/Permission.png"><br>在组和用户下新增<code>Everyone</code>，勾选<code>完全控制Full Control</code>。</li><li>尝试删除<code>AAD.BrokerPlugin</code>文件夹<br>在关闭Office的情况下删除该文件夹，如果出现需要管理员，请允许。</li></ol><h2 id="重启Office，并登录"><a href="#重启Office，并登录" class="headerlink" title="重启Office，并登录"></a>重启Office，并登录</h2><p>基本上删掉上述文件夹后，<code>TPM</code>的bug就不会出现了，可以重新登录拥有许可证的账户完成激活。</p><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://learn.microsoft.com/en-us/office/troubleshoot/activation/tpm-malfunctioned">Microsoft 365 Apps activation error Trusted Platform Module malfunctioned - Office | Microsoft Learn</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a href="https://windowsreport.com/error-code-80090016-office-365/">4 Tips to Fix Error Code 80090016 on Office 365 [Windows 11] (windowsreport.com)</a><a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
     
     
+    <categories>
+      
+      <category>软件技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>Office</tag>
+      
+    </tags>
     
   </entry>
   
@@ -91,9 +105,9 @@
       
       <tag>Windows</tag>
       
-      <tag>Linux</tag>
-      
       <tag>WSL</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Oracle</tag>
       
@@ -323,11 +337,11 @@
       
       <tag>Windows</tag>
       
+      <tag>WSL</tag>
+      
       <tag>Linux</tag>
       
       <tag>Conda</tag>
-      
-      <tag>WSL</tag>
       
     </tags>
     
