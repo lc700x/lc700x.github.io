@@ -215,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.2k 字
         
       </span>
     
@@ -280,8 +280,9 @@
 <p>保存为<code>ubuntu.vbs</code>文件。  </p>
 <h3 id="添加启动项"><a href="#添加启动项" class="headerlink" title="添加启动项"></a>添加启动项</h3><p><code>Win+R</code>运行: </p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">shell:</span>startup<br></code></pre></td></tr></table></figure>
-<p><img src="/img/2022-07-18/startup.jpg" srcset="/img/loading.gif" lazyload><br>将<code>ubuntu.vbs</code>文件放入打开的启动项文件夹内即可实现开机自启动并打开sshd服务远程连接</p>
-<h2 id="初始化ubuntu"><a href="#初始化ubuntu" class="headerlink" title="初始化ubuntu"></a>初始化ubuntu</h2><p>在Windows开始菜单打开Ubuntu，等待片刻弹出窗口提示设定用户名和密码，输入后按<code>enter</code>即可</p>
+<p><img src="/img/2022-07-18/startup.jpg" srcset="/img/loading.gif" lazyload><br>将<code>ubuntu.vbs</code>文件放入打开的启动项文件夹内即可实现开机自启动并打开sshd服务远程连接。这种方法支持从另一台机器访问WSL2。</p>
+<h3 id="附：在本机Windows下通过VSCode连接WSL2"><a href="#附：在本机Windows下通过VSCode连接WSL2" class="headerlink" title="附：在本机Windows下通过VSCode连接WSL2"></a>附：在本机Windows下通过VSCode连接WSL2</h3><p>只需要下载Microsoft提供的<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL Extension插件</a>即可自动识别本机的WSL2子系统进行连接。</p>
+<h2 id="初始化Ubuntu"><a href="#初始化Ubuntu" class="headerlink" title="初始化Ubuntu"></a>初始化Ubuntu</h2><p>在Windows开始菜单打开Ubuntu，等待片刻弹出窗口提示设定用户名和密码，输入后按<code>enter</code>即可</p>
 <h2 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h2><div class="note note-success">
             <p>根据<a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/wsl-user-guide/index.html#getting-started-with-cuda-on-wsl">CUDA官网的WSL安装教程</a>，最新的NVIDIA显卡驱动（516.59）已包含对WSL2的全面支持，无需单独安装Linux版的显卡驱动 </p>
           </div>
