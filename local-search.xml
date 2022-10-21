@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项</title>
+    <link href="/2022/10/21/%E4%BD%BF%E7%94%A8one-key-hidpi%E5%BC%80%E5%90%AFMac%E5%A4%96%E6%8E%A5%E4%B8%AD%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E5%B1%8F%E5%B9%95HiDPI%E9%80%89%E9%A1%B9/"/>
+    <url>/2022/10/21/%E4%BD%BF%E7%94%A8one-key-hidpi%E5%BC%80%E5%90%AFMac%E5%A4%96%E6%8E%A5%E4%B8%AD%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E5%B1%8F%E5%B9%95HiDPI%E9%80%89%E9%A1%B9/</url>
+    
+    <content type="html"><![CDATA[<h1 id="需求概述"><a href="#需求概述" class="headerlink" title="需求概述"></a>需求概述</h1><p>最近想连接一块小屏幕一边放视频，一边记笔记。于是掏出来了之前买来打游戏的<code>14-inch 1080p</code>分辨率的便携扩展屏和在<code>Mac</code>连接。发现对于这块低分辨率的屏幕，<code>Mac</code>默认的调节选项要么默认分辨率字号太小，要么就是调低分辨率字体模糊。在网上找了个<a href="">one-key-hidpi</a>的脚本开启<code>HiDPI</code>解决了这个问题，屏幕显示字体合适也清晰了。</p><h2 id="14-inch-1080p-默认分辨率"><a href="#14-inch-1080p-默认分辨率" class="headerlink" title="14-inch 1080p 默认分辨率"></a>14-inch 1080p 默认分辨率</h2><p>字体很小<br><img src="/../img/2022-10-21/Before.png"></p><h2 id="14-inch-1080p-HiDPI分辨率"><a href="#14-inch-1080p-HiDPI分辨率" class="headerlink" title="14-inch 1080p HiDPI分辨率"></a>14-inch 1080p HiDPI分辨率</h2><p>字体正常清晰<br><img src="/../img/2022-10-02/After.png"></p><h1 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h1><ol><li>打开<code>Terminal</code>终端，将终端的窗口移到需要调整的屏幕里，运行：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/master/hidpi.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure></li><li>选择<code>(1) Enable HiDPI</code>，键盘输入数字<code>1</code>。<br><img src="/../img/2022-10-21/S1.png"></li><li>选择想要的图标，例如输入数字<code>4</code>，选择<code>(4) LG Display</code>作为经过注入<code>EDID</code>后的图标。<br><img src="/../img/2022-10-21/S2.png"></li><li>输入管理员密码，确认。<br>选择对应屏幕分辨率，输入数字<code>2</code>, 选择<code>(2) 1920x1080 Display (use 1424x802, fix underscaled after sleep)</code>。<br><img src="/../img/2022-10-21/S3.png"></li><li>最后重启，调整分辨率即可。<br><img src="/../img/2022-10-21/Scale.png"></li></ol><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://github.com/xzhih/one-key-hidpi/blob/master/README-zh.md">一键开启 macOS HiDPI</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件技术</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Mac</tag>
+      
+      <tag>HiDPI</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>解决Office激活失败出现TPM错误（800090016）</title>
     <link href="/2022/10/16/%E8%A7%A3%E5%86%B3Office%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5%E5%87%BA%E7%8E%B0TPM%E9%94%99%E8%AF%AF%EF%BC%88800090016%EF%BC%89/"/>
     <url>/2022/10/16/%E8%A7%A3%E5%86%B3Office%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5%E5%87%BA%E7%8E%B0TPM%E9%94%99%E8%AF%AF%EF%BC%88800090016%EF%BC%89/</url>
