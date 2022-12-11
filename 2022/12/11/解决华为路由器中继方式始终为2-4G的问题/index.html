@@ -18,25 +18,25 @@
   <meta name="author" content="lc700x">
   <meta name="keywords" content="">
   
-    <meta name="description" content="通过一键脚本注入EDID开启Mac外接小尺寸中低分辨率屏幕的HiDPI支持">
+    <meta name="description" content="通过华为路由器的中继模式优化房间的Wi-Fi信号，强制使用5GHz频段。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项">
-<meta property="og:url" content="https://cellport.top/2022/10/21/%E4%BD%BF%E7%94%A8one-key-hidpi%E5%BC%80%E5%90%AFMac%E5%A4%96%E6%8E%A5%E4%B8%AD%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E5%B1%8F%E5%B9%95HiDPI%E9%80%89%E9%A1%B9/index.html">
+<meta property="og:title" content="解决华为路由器中继方式始终为2.4G的问题">
+<meta property="og:url" content="https://cellport.top/2022/12/11/%E8%A7%A3%E5%86%B3%E5%8D%8E%E4%B8%BA%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E7%BB%A7%E6%96%B9%E5%BC%8F%E5%A7%8B%E7%BB%88%E4%B8%BA2-4G%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="学习中lc700x">
-<meta property="og:description" content="通过一键脚本注入EDID开启Mac外接小尺寸中低分辨率屏幕的HiDPI支持">
+<meta property="og:description" content="通过华为路由器的中继模式优化房间的Wi-Fi信号，强制使用5GHz频段。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cellport.top/img/2022-10-21/hidpi.gif">
-<meta property="article:published_time" content="2022-10-21T13:28:34.000Z">
-<meta property="article:modified_time" content="2022-10-21T13:28:34.000Z">
+<meta property="og:image" content="https://cellport.top/img/2022-12-11/wifi-5.png">
+<meta property="article:published_time" content="2022-12-11T11:04:00.000Z">
+<meta property="article:modified_time" content="2022-12-11T11:04:00.000Z">
 <meta property="article:author" content="lc700x">
-<meta property="article:tag" content="Mac">
-<meta property="article:tag" content="HiDPI">
+<meta property="article:tag" content="Wi-Fi">
+<meta property="article:tag" content="Router">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cellport.top/img/2022-10-21/hidpi.gif">
+<meta name="twitter:image" content="https://cellport.top/img/2022-12-11/wifi-5.png">
   
   
   
-  <title>使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项 - 学习中lc700x</title>
+  <title>解决华为路由器中继方式始终为2.4G的问题 - 学习中lc700x</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项"></span>
+            <span id="subtitle" data-typed-text="解决华为路由器中继方式始终为2.4G的问题"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-21 21:28" pubdate>
-          2022年10月21日
+        <time datetime="2022-12-11 19:04" pubdate>
+          2022年12月11日
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          540 字
+          1k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          5 分钟
+          9 分钟
         
       </span>
     
@@ -261,23 +261,31 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项</h1>
+            <h1 style="display: none">解决华为路由器中继方式始终为2.4G的问题</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="需求概述"><a href="#需求概述" class="headerlink" title="需求概述"></a>需求概述</h1><p>最近想连接一块小屏幕一边放视频，一边记笔记。于是掏出来了之前买来打游戏的<code>14-inch 1080p</code>分辨率的便携扩展屏和在<code>Mac</code>连接。发现对于这块低分辨率的屏幕，<code>Mac</code>默认的调节选项要么默认分辨率字号太小，要么就是调低分辨率字体模糊。在网上找了个<a href="">one-key-hidpi</a>的脚本开启<code>HiDPI</code>解决了这个问题，屏幕显示字体合适也清晰了。</p>
-<h2 id="14-inch-1080p-默认分辨率"><a href="#14-inch-1080p-默认分辨率" class="headerlink" title="14-inch 1080p 默认分辨率"></a>14-inch 1080p 默认分辨率</h2><p>字体很小<br><img src="/../img/2022-10-21/Before.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="14-inch-1080p-HiDPI分辨率"><a href="#14-inch-1080p-HiDPI分辨率" class="headerlink" title="14-inch 1080p HiDPI分辨率"></a>14-inch 1080p HiDPI分辨率</h2><p>字体正常清晰<br><img src="/../img/2022-10-21/After.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="设置步骤"><a href="#设置步骤" class="headerlink" title="设置步骤"></a>设置步骤</h1><ol>
-<li>打开<code>Terminal</code>终端，将终端的窗口移到需要调整的屏幕里，运行：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">bash -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://raw.githubusercontent.com/xzhih/one-key-hidpi/master/hidpi.sh)</span>&quot;</span><br></code></pre></td></tr></table></figure></li>
-<li>选择<code>(1) Enable HiDPI</code>，键盘输入数字<code>1</code>。<br><img src="/../img/2022-10-21/S1.png" srcset="/img/loading.gif" lazyload></li>
-<li>选择想要的图标，例如输入数字<code>4</code>，选择<code>(4) LG Display</code>作为经过注入<code>EDID</code>后的图标。<br><img src="/../img/2022-10-21/S2.png" srcset="/img/loading.gif" lazyload></li>
-<li>输入管理员密码，确认。<br>选择对应屏幕分辨率，输入数字<code>2</code>, 选择<code>(2) 1920x1080 Display (use 1424x802, fix underscaled after sleep)</code>。<br><img src="/../img/2022-10-21/S3.png" srcset="/img/loading.gif" lazyload></li>
-<li>最后重启，调整分辨率即可。<br><img src="/../img/2022-10-21/Scale.png" srcset="/img/loading.gif" lazyload></li>
+                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>最近房东升级了新的光纤套餐，虽然光纤是<code>1Gbps</code>的，但是所配的路由器性能一般（型号：<code>AirTies 9260R</code>），信号非常不稳定，多重因素致使我房间里（与主路由器隔了一个房间三堵墙）的网络速度、信号、稳定性感人：</p>
+<ol>
+<li>5GHz频段能达到<code>100Mbps</code>，但是信号太弱，经常掉线连到2.4G。</li>
+<li>掉到2.4GHz速度居然只有<code>2Mbps</code>，不能忍，49年入国军之感。</li>
+<li>由于是房东Wi-Fi的是双频合一的名称<code>SSID</code>，我的设备无法固定选择某个频率，因此很不稳定。</li>
 </ol>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/xzhih/one-key-hidpi/blob/master/README-zh.md">一键开启 macOS HiDPI</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>我掏出了闲置的<code>华为荣耀路由Pro 2</code>，使用默认的中继模式，虽然信号满格但是网速也是奇慢，查看中继模式是2.4GHz。<br>但是华为这个后台管理（默认是<a href="192.168.3.1">192.168.3.1</a>）并没有选择中继频段固定为5GHz的选项，如果能把5GHz信号作为输入，那么信号稳定性和信号强度将会大大提高！</p>
+<h2 id="思路一"><a href="#思路一" class="headerlink" title="思路一"></a>思路一</h2><p>华为默认的后台管理没有中继选择频率的选项，那么能否刷第三方路由器固件来获得呢？<br>搜索了下发现荣耀路基本没有路子刷机，遂放弃。</p>
+<h2 id="思路二"><a href="#思路二" class="headerlink" title="思路二"></a>思路二</h2><p>屏蔽掉<code>2.4GHz</code>信号，让荣耀路由只能中继<code>5GHz</code>。</p>
+<ol>
+<li>第一种方法是关闭路由器的<code>2.4GHz</code>波段或将<code>2.4GHz</code>波段单独设置一个<code>SSID</code>。<br>虽然能进入主路由器的后台，由于是房东的路由器，这样会导致房内其他人的设备失去2.4GHz连接，所以就执行。</li>
+<li>第二种方法就是直接在主路由<code>2.4GHz</code>网卡下的网络安全过滤设置（<code>MAC Filter</code>）里屏蔽掉我的荣耀路由的网卡地址（<code>MAC</code>），所以中继路由器配置的时候就只能连<code>5Ghz</code>了。<br><img src="/../img/2022-12-11/AirTiesFilter.png" srcset="/img/loading.gif" lazyload><div class="note note-success">
+            <p>注意：荣耀路由中继连接到主路由器的<code>MAC</code>地址不是其路由器底部的<code>MAC</code>，具体还是查一下主路由的设置界面，我这边是最后三位不一致。<br>PS：这个思路深受对Mac OS设置5GHz优先的几个方案(<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/550489117)%E6%89%80%E5%90%AF%E5%8F%91%E3%80%82">https://zhuanlan.zhihu.com/p/550489117)所启发。</a></p>
+          </div></li>
+</ol>
+<h1 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h1><p>成功用<code>5GHz</code>中继后，最后不断地用SpeedTest优化中继路由器的位置，达到最好的信号是下行速度<code>70Mbps</code>（下载速度<code>14MB/s</code>)，而且很稳定，基本够用了。<br><img src="/../img/2022-12-11/status.png" srcset="/img/loading.gif" lazyload><br><img src="/../img/2022-12-11/speed.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/550489117">双频合一wifi(2.4G&#x2F;5G) 如何让mac 或windows优先选择5G？ 解法思路及最终解 smart connect - 知乎 (zhihu.com)</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.v2ex.com/t/476948">如何强制（或优先）让 macOS 处于 5G Wi-Fi 连接？ - V2EX</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://sysin.org/blog/macos-force-connect-5ghz-wifi/">Mac 如何强制使用 5G 频段 Wi-Fi - sysin | SYStem INside | 数据中心系统内幕</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -310,9 +318,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Mac/">#Mac</a>
+        <a href="/tags/Wi-Fi/">#Wi-Fi</a>
       
-        <a href="/tags/HiDPI/">#HiDPI</a>
+        <a href="/tags/Router/">#Router</a>
       
     </div>
   
@@ -324,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项</div>
-      <div>https://cellport.top/2022/10/21/使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项/</div>
+      <div>解决华为路由器中继方式始终为2.4G的问题</div>
+      <div>https://cellport.top/2022/12/11/解决华为路由器中继方式始终为2-4G的问题/</div>
     </div>
     <div class="license-meta">
       
@@ -337,7 +345,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月21日</div>
+          <div>2022年12月11日</div>
         </div>
       
       
@@ -367,18 +375,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/11/%E8%A7%A3%E5%86%B3%E5%8D%8E%E4%B8%BA%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%AD%E7%BB%A7%E6%96%B9%E5%BC%8F%E5%A7%8B%E7%BB%88%E4%B8%BA2-4G%E7%9A%84%E9%97%AE%E9%A2%98/" title="解决华为路由器中继方式始终为2.4G的问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">解决华为路由器中继方式始终为2.4G的问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/10/16/%E8%A7%A3%E5%86%B3Office%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5%E5%87%BA%E7%8E%B0TPM%E9%94%99%E8%AF%AF%EF%BC%88800090016%EF%BC%89/" title="解决Office激活失败出现TPM错误（800090016）">
-                        <span class="hidden-mobile">解决Office激活失败出现TPM错误（800090016）</span>
+                      <a href="/2022/10/21/%E4%BD%BF%E7%94%A8one-key-hidpi%E5%BC%80%E5%90%AFMac%E5%A4%96%E6%8E%A5%E4%B8%AD%E4%BD%8E%E5%88%86%E8%BE%A8%E7%8E%87%E5%B1%8F%E5%B9%95HiDPI%E9%80%89%E9%A1%B9/" title="使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项">
+                        <span class="hidden-mobile">使用one-key-hidpi开启Mac外接中低分辨率屏幕HiDPI选项</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
