@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/default.png">
+  <link rel="icon" href="/img/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="lc700x">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="吴恩达大佬讲的Machine Learning 2022笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS229机器学习笔记">
+<meta property="og:url" content="https://cellport.top/2022/07/25/015f665edc89/index.html">
+<meta property="og:site_name" content="lc700x‘s learning blog">
+<meta property="og:description" content="吴恩达大佬讲的Machine Learning 2022笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cellport.top/img/2022-07-25/machine-learning-stanford.png">
+<meta property="article:published_time" content="2022-07-25T04:21:53.000Z">
+<meta property="article:modified_time" content="2022-07-25T04:21:53.000Z">
+<meta property="article:author" content="lc700x">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cellport.top/img/2022-07-25/machine-learning-stanford.png">
+  
+  
+  
+  <title>CS229机器学习笔记 - lc700x‘s learning blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cellport.top","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>学习中lc700x</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/doramon.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="CS229机器学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-25 12:21" pubdate>
+          2022年7月25日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          54 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CS229机器学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="学习环境搭建"><a href="#学习环境搭建" class="headerlink" title="学习环境搭建"></a>学习环境搭建</h1><h2 id="Git下载课程作业源码"><a href="#Git下载课程作业源码" class="headerlink" title="Git下载课程作业源码"></a>Git下载课程作业源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/dibgerge/ml-coursera-python-assignments.git<br></code></pre></td></tr></table></figure>
+<p>进入课程文件夹</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ml-coursera-python-assignments<br></code></pre></td></tr></table></figure>
+<h2 id="安装Python依赖环境"><a href="#安装Python依赖环境" class="headerlink" title="安装Python依赖环境"></a>安装Python依赖环境</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda <span class="hljs-built_in">env</span> create -f environment.yml<br></code></pre></td></tr></table></figure>
+<p>激活环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate machine_learning<br></code></pre></td></tr></table></figure>
+<h2 id="可选（vscode可使用jupyter插件）"><a href="#可选（vscode可使用jupyter插件）" class="headerlink" title="可选（vscode可使用jupyter插件）"></a>可选（vscode可使用jupyter插件）</h2><p>打开<code>Jupyter Notebook</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">jupyter notebook<br></code></pre></td></tr></table></figure>
+<p>然后打开<code>Exercise</code>文件夹里对应的<code>*.ipynb</code>文件即可</p>
+<h1 id="监督学习-Supervised-Learning"><a href="#监督学习-Supervised-Learning" class="headerlink" title="监督学习 Supervised Learning"></a>监督学习 Supervised Learning</h1><p>Learn from <strong>labeled data</strong> with <strong>“right answers”</strong>. </p>
+<h2 id="回归-Regression"><a href="#回归-Regression" class="headerlink" title="回归 Regression"></a>回归 Regression</h2><p>Predict a <strong>number</strong>.<br><strong>Infinetly</strong> many possible outputs. </p>
+<h2 id="分类-Classification"><a href="#分类-Classification" class="headerlink" title="分类 Classification"></a>分类 Classification</h2><p>Predict <strong>categories</strong>.<br>Small number of <strong>possible outputs</strong>. </p>
+<p><img src="/img/2022-07-25/(un)supervised.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="非监督学习-Unsupervised-Learning"><a href="#非监督学习-Unsupervised-Learning" class="headerlink" title="非监督学习 Unsupervised Learning"></a>非监督学习 Unsupervised Learning</h1><p>Find something in <strong>unlabeled data</strong>, inputs $x$ without ouput labels $y$.<br>Algorithm finds <strong>structure</strong> inside data. </p>
+<p><img src="/img/2022-07-25/unsupervised.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="聚类-Clustering"><a href="#聚类-Clustering" class="headerlink" title="聚类 Clustering"></a>聚类 Clustering</h2><p>Group similar data points together. e.g.: </p>
+<h3 id="Google-News将相关新闻聚类起来"><a href="#Google-News将相关新闻聚类起来" class="headerlink" title="Google News将相关新闻聚类起来"></a>Google News将相关新闻聚类起来</h3><p>Panda，twin关键词</p>
+<h3 id="DNA-microarray"><a href="#DNA-microarray" class="headerlink" title="DNA microarray"></a>DNA microarray</h3><p>把人分为几组，基因和个体特征的联系</p>
+<h3 id="Grouping-customers"><a href="#Grouping-customers" class="headerlink" title="Grouping customers"></a>Grouping customers</h3><p>分类不同的客户，了解他们的需求</p>
+<h2 id="异常检测-Anomaly-detection"><a href="#异常检测-Anomaly-detection" class="headerlink" title="异常检测 Anomaly detection"></a>异常检测 Anomaly detection</h2><p>Find unusual data points. </p>
+<h2 id="降维-Dimensionality-reduction"><a href="#降维-Dimensionality-reduction" class="headerlink" title="降维 Dimensionality reduction"></a>降维 Dimensionality reduction</h2><p>Compress data using fewer numbers. </p>
+<h1 id="Jupyter-Notebooks"><a href="#Jupyter-Notebooks" class="headerlink" title="Jupyter Notebooks"></a>Jupyter Notebooks</h1><h2 id="笔记块-Markdown-Cell"><a href="#笔记块-Markdown-Cell" class="headerlink" title="笔记块 Markdown Cell"></a>笔记块 Markdown Cell</h2><p>Mardown笔记</p>
+<h2 id="代码块-Code-cell"><a href="#代码块-Code-cell" class="headerlink" title="代码块 Code cell"></a>代码块 Code cell</h2><p>可以运行代码</p>
+<h1 id="线性回归模型-Linear-Regression-Model"><a href="#线性回归模型-Linear-Regression-Model" class="headerlink" title="线性回归模型 Linear Regression Model"></a>线性回归模型 Linear Regression Model</h1><h2 id="术语-Terminology"><a href="#术语-Terminology" class="headerlink" title="术语 Terminology"></a>术语 Terminology</h2><h3 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h3><p>Data used to train the model.  </p>
+<h3 id="Notation"><a href="#Notation" class="headerlink" title="Notation"></a>Notation</h3><p>$x&#x3D;$ “input” variable feature<br>$y&#x3D;$ “output” variable, “target” variable<br>$m&#x3D;$ number of training examples<br>$(x,y)&#x3D;$ single training example<br>$(x^{(i)},y^{(i)})&#x3D;i^{th}$ training example, $(1^{st}, 2^{nd}, 3^{rd}, …)$<br>$\hat{y}&#x3D;$ estimated target $y$</p>
+<h3 id="单变量-Univariate"><a href="#单变量-Univariate" class="headerlink" title="单变量 Univariate"></a>单变量 Univariate</h3><p>One variable</p>
+<h2 id="代价函数-Cost-Function"><a href="#代价函数-Cost-Function" class="headerlink" title="代价函数 Cost Function"></a>代价函数 Cost Function</h2><p><strong>Model:</strong><br>$$<br>f_{w,b}(x)&#x3D;wx+b<br>$$<br><strong>Parameters:</strong><br>$$<br>w,b<br>$$<br><strong>Squared error cost function:</strong> for linear regression or any function<br>$$<br>J(w,b)&#x3D;\frac{1}{2m}\sum_{m}^{i&#x3D;1}(f_{w,b}(x^{(i)})-y^{(i)})^2<br>$$<br><strong>Goal:</strong><br>$$<br>\min_{w,b}J(w,b)<br>$$</p>
+<h3 id="延申到其他函数"><a href="#延申到其他函数" class="headerlink" title="延申到其他函数"></a>延申到其他函数</h3><p>$$<br>\min_{w_1,w_2,…,b}J(w_1,w_2,…,b)<br>$$</p>
+<h1 id="梯度下降-Gradient-descent"><a href="#梯度下降-Gradient-descent" class="headerlink" title="梯度下降 Gradient descent"></a>梯度下降 Gradient descent</h1><p>$$<br>w&#x3D;w-α\frac{\partial}{ {\partial}w}J(w,b)<br>$$</p>
+<p>$$<br>b&#x3D;b-α\frac{\partial}{ {\partial}b}J(w,b)<br>$$</p>
+<p><strong>Learning Rate:</strong> $α$<br><strong>Derivative:</strong> $\frac{\partial}{ {\partial}w}J(w,b)$<br><img src="/img/2022-07-25/w-%CE%B1.png" srcset="/img/loading.gif" lazyload>  </p>
+<div class="note note-success">
+            <p>Correct: 需要同时同步$w, b$<br>$$<br>w&#x3D;w-α \frac{\partial}{ {\partial}w}J(w)<br>$$</p>
+          </div>
+<h2 id="Batch-gradient-descent"><a href="#Batch-gradient-descent" class="headerlink" title="Batch gradient descent"></a>Batch gradient descent</h2><p><strong>batch:</strong> each step of gradient descent uses all the traning exaples</p>
+<h1 id="多类特征-Multible-features"><a href="#多类特征-Multible-features" class="headerlink" title="多类特征 Multible features"></a>多类特征 Multible features</h1><h2 id="向量-Vector"><a href="#向量-Vector" class="headerlink" title="向量 Vector"></a>向量 Vector</h2><p>$$<br>f_{w,b}(x)&#x3D;w_1x_1+w_2x_2+···+w_nx_n+b<br>$$<br>$$<br>f_{\vec{w},b}&#x3D;\vec{w}·\vec{x}+b<br>$$</p>
+<h2 id="向量化-Vectorization"><a href="#向量化-Vectorization" class="headerlink" title="向量化 Vectorization"></a>向量化 Vectorization</h2><p><strong>Numpy</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">w = np.array([<span class="hljs-number">1.0</span>,<span class="hljs-number">2.5</span>,-<span class="hljs-number">2.5</span>])<br>b = <span class="hljs-number">4</span><br>x = np.array([<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>])<br></code></pre></td></tr></table></figure>
+<div class="note note-success">
+            <p>编程语言中，通常从0开始计数:<br>x[0], x[1], x[2]   </p>
+          </div>  
+<h3 id="无向量化的代码"><a href="#无向量化的代码" class="headerlink" title="无向量化的代码"></a>无向量化的代码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-number">3</span>):<br>    f = f + w[j] * x[j]<br></code></pre></td></tr></table></figure>
+<h3 id="向量化可以简化代码，提升效率"><a href="#向量化可以简化代码，提升效率" class="headerlink" title="向量化可以简化代码，提升效率"></a>向量化可以简化代码，提升效率</h3><p>$$<br>f_{\vec{w},b}&#x3D;\vec{w}·\vec{x}+b<br>$$<br>对应代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">f = np.dot(w,x)+b<br></code></pre></td></tr></table></figure>
+<h1 id="特征缩放"><a href="#特征缩放" class="headerlink" title="特征缩放"></a>特征缩放</h1><h2 id="最大值归一化"><a href="#最大值归一化" class="headerlink" title="最大值归一化"></a>最大值归一化</h2><p>$$\frac{x}{x_{max} }$$</p>
+<h2 id="平均数归一化"><a href="#平均数归一化" class="headerlink" title="平均数归一化"></a>平均数归一化</h2><p>$$\frac{x}{x_{max}-x_{min} }$$</p>
+<h2 id="Z归一化"><a href="#Z归一化" class="headerlink" title="Z归一化"></a>Z归一化</h2><p>标准偏差 standard deviation<br>$$x_1&#x3D;\frac{x_1-μ_1}{σ_1}$$</p>
+<h2 id="检查提督是否收敛"><a href="#检查提督是否收敛" class="headerlink" title="检查提督是否收敛"></a>检查提督是否收敛</h2><p>iterations need varies<br><strong>判定方法：</strong><br>let $ε$ be $10^{-3}$, if the cost $J(\vec{w},b)&lt;ε$</p>
+<h2 id="训练曲线-Training-curve"><a href="#训练曲线-Training-curve" class="headerlink" title="训练曲线 Training curve"></a>训练曲线 Training curve</h2><p>不收敛，震荡等: Learning rate $α$ too large  </p>
+<h2 id="学习速率等选择"><a href="#学习速率等选择" class="headerlink" title="学习速率等选择"></a>学习速率等选择</h2><p>$α$的范围选择：…0.001, 0.01, 0.1, 1 …</p>
+<p><img src="/img/2022-07-25/%CE%B1_rate.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="特征工程-Feature-engineering"><a href="#特征工程-Feature-engineering" class="headerlink" title="特征工程 Feature engineering"></a>特征工程 Feature engineering</h2><p>$$<br>f_{\vec{w},b}(x)&#x3D;w_1x_1+w_2x_2+b<br>$$<br><strong>New feature:</strong><br>$$<br>x_3&#x3D;x_1x_2<br>$$<br><strong>New function:</strong> could be better<br>$$<br>f_{\vec{w},b}(x)&#x3D;w_1x_1+w_2x_2+w_3x_3+b<br>$$</p>
+<h2 id="多项式回归-Polynomial-regression"><a href="#多项式回归-Polynomial-regression" class="headerlink" title="多项式回归 Polynomial regression"></a>多项式回归 Polynomial regression</h2><p>$$<br>f_{\vec{w},b}(x)&#x3D;w_1x+w_2x^2+w_3x^3+b<br>$$</p>
+<h1 id="动机-Motivation"><a href="#动机-Motivation" class="headerlink" title="动机 Motivation"></a>动机 Motivation</h1><h2 id="Classifiction"><a href="#Classifiction" class="headerlink" title="Classifiction"></a>Classifiction</h2><p>设置阈值：threshold $\hat{y}$ via <strong>Linear Regression</strong></p>
+<div class="note note-success">
+            <p> 在分类任务里，并不推荐线性回归<br>一些术语：decision boundary，logistic regression  </p>
+          </div>
+<h2 id="逻辑回归-Logistic-regression"><a href="#逻辑回归-Logistic-regression" class="headerlink" title="逻辑回归 Logistic regression"></a>逻辑回归 Logistic regression</h2><p>output between 0 and 1<br>$$<br>f_{\vec{w},b}(\vec{x})&#x3D;\frac{1}{1+e^{-(\vec{w}·\vec{x}+b)} }<br>$$</p>
+<h3 id="Decesion-boundary"><a href="#Decesion-boundary" class="headerlink" title="Decesion boundary"></a>Decesion boundary</h3><p>$$<br>z&#x3D;\vec{w}·\vec{x}+b<br>$$<br>$$<br>f_{\vec{w},b}(\vec{x})&#x3D;g(z)<br>$$<br>$g(z)$ is S型函数 sigmoid function。</p>
+<p><img src="/img/2022-07-25/boundary.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="逻辑回归的代价函数-Cost-function-of-Logistic-regression"><a href="#逻辑回归的代价函数-Cost-function-of-Logistic-regression" class="headerlink" title="逻辑回归的代价函数 Cost function of Logistic regression"></a>逻辑回归的代价函数 Cost function of Logistic regression</h1><p><img src="/img/2022-07-25/error_cost.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="损失函数-Loss-function"><a href="#损失函数-Loss-function" class="headerlink" title="损失函数 Loss function"></a>损失函数 Loss function</h2><p>$$<br>L(f_{\vec{w},b}(x^{(i)}),y^{(i)})&#x3D;\begin{cases} -log(f_{\vec{w},b}(x^{(i)})), &amp; \text{if $y^{(i)}&#x3D;1$} \ -log(1-f_{\vec{w},b}(x^{(i)})),&amp; \text{if $y^{(i)}&#x3D;0$}\end{cases}<br>$$</p>
+<h2 id="简化损失函数-Simplied-loss-function"><a href="#简化损失函数-Simplied-loss-function" class="headerlink" title="简化损失函数 Simplied loss function"></a>简化损失函数 Simplied loss function</h2><p>$$<br>L(f_{\vec{w},b}(x^{(i)}),y^{(i)})&#x3D;-y^{(i)}log(f_{\vec{w},b}(x^{(i)}))-(1-y^{(i)})log(1-f_{\vec{w},b}(x^{(i)}))<br>$$<br>so 损失函数：<br>$$<br>J(\vec{w},b)&#x3D;\frac{1}{m}\sum_{i&#x3D;1}^m[L(f_{\vec{w},b}(x^{(i)}),y^{(i)})]&#x3D;\frac{1}{m}\sum_{i&#x3D;1}^m[-y^{(i)}log(f_{\vec{w},b}(x^{(i)}))-(1-y^{(i)})log(1-f_{\vec{w},b}(x^{(i)}))]<br>$$</p>
+<h1 id="过拟合-Overfitting"><a href="#过拟合-Overfitting" class="headerlink" title="过拟合 Overfitting"></a>过拟合 Overfitting</h1><p>Fits the training sets extremely well: <strong>high variance</strong></p>
+<h2 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h2><p><img src="/img/2022-07-25/overfit.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h2><p><img src="/img/2022-07-25/overfit2.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="避免过拟合"><a href="#避免过拟合" class="headerlink" title="避免过拟合"></a>避免过拟合</h2><h3 id="拿到更多的数据"><a href="#拿到更多的数据" class="headerlink" title="拿到更多的数据"></a>拿到更多的数据</h3><p>collect more training examples</p>
+<h3 id="用合适的子数据"><a href="#用合适的子数据" class="headerlink" title="用合适的子数据"></a>用合适的子数据</h3><p><strong>feature selection:</strong> chosing most relevant subset of data</p>
+<h3 id="正则化-Regularization"><a href="#正则化-Regularization" class="headerlink" title="正则化 Regularization"></a>正则化 Regularization</h3><p>减小各个系数$w$的值，Reduce the size of parameters $w_j$, 可以不管$b$<br>$$<br>J(\vec{w},b)&#x3D;\frac{1}{2m}\sum_{i&#x3D;1}^m(f_{\vec{w},b}(\vec{x}^{(i)})-y^{(i)})^2+\frac{λ}{2m}\sum_{j&#x3D;1}^nw_j^2<br>$$<br>$λ$ balances both goals：<br><strong>平衡参数</strong>$λ$：平衡拟合，并且保持各个系数$w_j$最小。<br>Gradient descent</p>
+<p><img src="/img/2022-07-25/w_j_shrink.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="高级学习函数-Advanced-learning-algorithms-（大纲）"><a href="#高级学习函数-Advanced-learning-algorithms-（大纲）" class="headerlink" title="高级学习函数 Advanced learning algorithms （大纲）"></a>高级学习函数 Advanced learning algorithms （大纲）</h1><h2 id="神经网络-Neural-Networks"><a href="#神经网络-Neural-Networks" class="headerlink" title="神经网络 Neural Networks"></a>神经网络 Neural Networks</h2><h3 id="预测-inference-prediction"><a href="#预测-inference-prediction" class="headerlink" title="预测 inference (prediction)"></a>预测 inference (prediction)</h3><h3 id="训练-training"><a href="#训练-training" class="headerlink" title="训练 training"></a>训练 training</h3><h2 id="构建机器学习系统的建议-Practical-advice-for-building-ML-systems"><a href="#构建机器学习系统的建议-Practical-advice-for-building-ML-systems" class="headerlink" title="构建机器学习系统的建议 Practical advice for building ML systems"></a>构建机器学习系统的建议 Practical advice for building ML systems</h2><h2 id="决策树-Decesion-trees"><a href="#决策树-Decesion-trees" class="headerlink" title="决策树 Decesion trees"></a>决策树 Decesion trees</h2><h1 id="神经网络-Neural-networks"><a href="#神经网络-Neural-networks" class="headerlink" title="神经网络 Neural networks"></a>神经网络 Neural networks</h1><p>简化神经元的模型 Simplified mathematical model of a neuron<br>输入与输出 inputs &amp; outputs</p>
+<h2 id="Layer"><a href="#Layer" class="headerlink" title="Layer"></a>Layer</h2><p>一组神经元 A group of neurons</p>
+<p><img src="/img/2022-07-25/demand-prediction.png" srcset="/img/loading.gif" lazyload></p>
+<p>input layer - compute layer - output layer<br>4 number - 3 numbers - 1 number</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p>神经网络会自主学习特征 Neural networks will learn features</p>
+<h2 id="Multi-hiden-layers"><a href="#Multi-hiden-layers" class="headerlink" title="Multi hiden layers"></a>Multi hiden layers</h2><h1 id="图像识别-Image-recogonization"><a href="#图像识别-Image-recogonization" class="headerlink" title="图像识别 Image recogonization"></a>图像识别 Image recogonization</h1><h2 id="人脸识别-Face-recognization"><a href="#人脸识别-Face-recognization" class="headerlink" title="人脸识别 Face recognization"></a>人脸识别 Face recognization</h2><h2 id="汽车识别-Car-classification"><a href="#汽车识别-Car-classification" class="headerlink" title="汽车识别 Car classification"></a>汽车识别 Car classification</h2><h1 id="做出预测-Inference"><a href="#做出预测-Inference" class="headerlink" title="做出预测 Inference"></a>做出预测 Inference</h1><p><img src="/img/2022-07-25/digit_inference.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="TensorFlow-实现"><a href="#TensorFlow-实现" class="headerlink" title="TensorFlow 实现"></a>TensorFlow 实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">x = np.array([[<span class="hljs-number">200.0</span>, <span class="hljs-number">17.0</span>]])<br>layer_1 = Dense(units=<span class="hljs-number">3</span>, activation=<span class="hljs-string">&#x27;sigmoid&#x27;</span>)<br>a1 = layer_1(x)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">layer_2 = Dense(units=<span class="hljs-number">1</span>, activation=<span class="hljs-string">&#x27;sigmoid&#x27;</span>)<br>a1 = layer_2(a1)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> a2 &gt;= <span class="hljs-number">0.5</span>,<br>    yhat = <span class="hljs-number">1</span><br><span class="hljs-keyword">else</span>: <br>    yhat = <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<div class="note note-success">
+            <p>Numpy需要两个括号“[[]]” 是因为1x2的矩阵表达，计算更加有效率 </p><p><img src="/img/2022-07-25/numpy_matrix.png" srcset="/img/loading.gif" lazyload></p><p>Sigmoid Function：<br>$$<br>S(x)&#x3D;\frac{1}{1+e^{-x} }<br>$$</p>
+          </div>
+<h3 id="numpy和ternsorflow转换"><a href="#numpy和ternsorflow转换" class="headerlink" title="numpy和ternsorflow转换"></a>numpy和ternsorflow转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">a2.numpy() <span class="hljs-comment">#TensorFlow转换为Numpy数据</span><br></code></pre></td></tr></table></figure>
+<h3 id="搭建神经网络"><a href="#搭建神经网络" class="headerlink" title="搭建神经网络"></a>搭建神经网络</h3><p>合并两个Layer</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">layer_1 = Dense(units=<span class="hljs-number">3</span>, activation=<span class="hljs-string">&quot;sigmoid&quot;</span>)<br>layer_2 = Dense(units=<span class="hljs-number">1</span>, activation=<span class="hljs-string">&quot;sigmoid&quot;</span>)<br>model = Sequential([layer_1, layer_2])<br></code></pre></td></tr></table></figure>
+<p>另一种实现（常用）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">model = Sequential([Dense(units=<span class="hljs-number">3</span>, activation=<span class="hljs-string">&quot;sigmoid&quot;</span>), Dense(units=<span class="hljs-number">1</span>, activation=<span class="hljs-string">&quot;sigmoid&quot;</span>)])<br></code></pre></td></tr></table></figure>
+<p>组合之后的inference过程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">model.<span class="hljs-built_in">compile</span>(...)<br>x = np.array([<span class="hljs-number">0.</span>.., <span class="hljs-number">245</span>, ..., <span class="hljs-number">17</span>], [<span class="hljs-number">0.</span>.., <span class="hljs-number">200</span>, ..., <span class="hljs-number">184</span>])<br>y = np.array([<span class="hljs-number">1</span>,<span class="hljs-number">0</span>])<br>model.fit(x,y)<br>model.predict(x_new)<br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-07-25/NumPy.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="AI"><a href="#AI" class="headerlink" title="AI"></a>AI</h1><h2 id="ANI-vs-AGI-narrow-vs-giant"><a href="#ANI-vs-AGI-narrow-vs-giant" class="headerlink" title="ANI vs AGI (narrow vs giant)"></a>ANI vs AGI (narrow vs giant)</h2><h2 id="循环和向量化的对比-loops-vs-vectoriation"><a href="#循环和向量化的对比-loops-vs-vectoriation" class="headerlink" title="循环和向量化的对比 loops vs vectoriation"></a>循环和向量化的对比 loops vs vectoriation</h2><p>向量化的工作大大提高深度学习的效率  </p>
+<p><img src="/img/2022-07-25/vectorize.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>NumPy的Matrix Multiplication函数</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">X = np.array([[<span class="hljs-number">200</span>, <span class="hljs-number">17</span>]])<br>W = np.array([[<span class="hljs-number">1</span>, -<span class="hljs-number">3</span>, <span class="hljs-number">5</span>],[-<span class="hljs-number">2</span>, <span class="hljs-number">4</span>, -<span class="hljs-number">6</span>]])<br>B = np.array([[-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]])<br>np.matmal(A_in, W) + B<br></code></pre></td></tr></table></figure>
+<h3 id="矩阵乘法-Matrix-multiplication"><a href="#矩阵乘法-Matrix-multiplication" class="headerlink" title="矩阵乘法 Matrix multiplication"></a>矩阵乘法 Matrix multiplication</h3><p>转置矩阵$A$<br>计算规则</p>
+<p><img src="/img/2022-07-25/matrix_multi.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="使用TensorFlow来训练神经网络"><a href="#使用TensorFlow来训练神经网络" class="headerlink" title="使用TensorFlow来训练神经网络"></a>使用TensorFlow来训练神经网络</h1><h2 id="训练步骤"><a href="#训练步骤" class="headerlink" title="训练步骤"></a>训练步骤</h2><p><strong>epochs：</strong><br>number of steps in gradient desenct<br>梯度下降过程的步数<br><strong>训练主要步骤：</strong><br>第一步：指定模型，告诉TF如何计算来预测<br>第二步：使用特定损失函数强化模型<br>第三步：训练模型  </p>
+<h2 id="训练细节"><a href="#训练细节" class="headerlink" title="训练细节"></a>训练细节</h2><p>定义模型，<br>$$<br>f_{\vec{w},b}(x)&#x3D;?<br>$$<br>指定损失和代价函数<br>$$<br>L(f_{\vec{w},b}(x))<br>$$<br>$$<br>J({\vec{w},b})&#x3D;\frac{1}{m}\sum_{i&#x3D;1}^mL(f_{\vec{w},b}(x^{(i)}),y^{(i)})<br>$$<br>训练使得$J({\vec{w},b})$最小</p>
+<h3 id="逻辑回归-logistic-regression"><a href="#逻辑回归-logistic-regression" class="headerlink" title="逻辑回归 logistic regression"></a>逻辑回归 logistic regression</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">z = np.dot(w,x) + b<br>f_x = <span class="hljs-number">1</span>/(<span class="hljs-number">1</span> + np.exp(-z))<br></code></pre></td></tr></table></figure>
+<h3 id="逻辑损失-logistic-loss"><a href="#逻辑损失-logistic-loss" class="headerlink" title="逻辑损失 logistic loss"></a>逻辑损失 logistic loss</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">loss = -y * np.log(f_x) - (<span class="hljs-number">1</span>-y) * np.log(<span class="hljs-number">1</span>-f_x)<br>w = w - alpha * dj_dw <span class="hljs-comment">#w权重，alpha回归速率</span><br>b = b - alpha * dj_db<br></code></pre></td></tr></table></figure>
+<h3 id="神经网络-neural-network"><a href="#神经网络-neural-network" class="headerlink" title="神经网络 neural network"></a>神经网络 neural network</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">model = Sequential ([<br>    Dense(...)<br>    Dense(...)<br>    Dense(...)<br>    ])<br></code></pre></td></tr></table></figure>
+<h3 id="二元交叉熵-binary-cross-entropy"><a href="#二元交叉熵-binary-cross-entropy" class="headerlink" title="二元交叉熵 binary cross entropy"></a>二元交叉熵 binary cross entropy</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">model.<span class="hljs-built_in">compile</span>(loss=BinaryCrossentropy())<br>model.fit(X,y,epochs=<span class="hljs-number">100</span>)<br></code></pre></td></tr></table></figure>
+<p>$$<br>L(f_{\vec{w},b}(x^{(i)}),y^{(i)})&#x3D;-y^{(i)}log(f_{\vec{w},b}(x^{(i)}))-(1-y^{(i)})log(1-f_{\vec{w},b}(x^{(i)}))<br>$$</p>
+<h2 id="Activation-Functions"><a href="#Activation-Functions" class="headerlink" title="Activation Functions"></a>Activation Functions</h2><h3 id="Linear-activation-function"><a href="#Linear-activation-function" class="headerlink" title="Linear activation function"></a>Linear activation function</h3><p>$$<br>g(z)&#x3D;z<br>$$<br>Sigmoid<br>$$<br>g(z)&#x3D; \frac{1}{(1 + e^{-z})}<br>$$<br>ReLU (Rectified Linear Unit)<br>$$<br>g(z)&#x3D;max(0,z)<br>$$</p>
+<h3 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…"></a>未完待续…</h3>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/AI/">#AI</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>CS229机器学习笔记</div>
+      <div>https://cellport.top/2022/07/25/015f665edc89/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>lc700x</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月25日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/44830959eb60/" title="json标记文件批量转化黑白mask">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">json标记文件批量转化黑白mask</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/18/2dcfa60c8f60/" title="WSL2部署PyTorch环境">
+                        <span class="hidden-mobile">WSL2部署PyTorch环境</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      浙ICP备2021030953号-1
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

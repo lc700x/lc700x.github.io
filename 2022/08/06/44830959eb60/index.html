@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/default.png">
+  <link rel="icon" href="/img/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="lc700x">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="修改labelme的json_to_dataset的Python代码，结合bash实现json标记文件批量转化为黑白mask的图片">
+<meta property="og:type" content="article">
+<meta property="og:title" content="json标记文件批量转化黑白mask">
+<meta property="og:url" content="https://cellport.top/2022/08/06/44830959eb60/index.html">
+<meta property="og:site_name" content="lc700x‘s learning blog">
+<meta property="og:description" content="修改labelme的json_to_dataset的Python代码，结合bash实现json标记文件批量转化为黑白mask的图片">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cellport.top/img/2022-08-06/labelme.jpg">
+<meta property="article:published_time" content="2022-08-06T02:47:22.000Z">
+<meta property="article:modified_time" content="2022-08-06T02:47:22.000Z">
+<meta property="article:author" content="lc700x">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Conda">
+<meta property="article:tag" content="Labelme">
+<meta property="article:tag" content="Json">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cellport.top/img/2022-08-06/labelme.jpg">
+  
+  
+  
+  <title>json标记文件批量转化黑白mask - lc700x‘s learning blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cellport.top","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>学习中lc700x</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/tech.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="json标记文件批量转化黑白mask"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-08-06 10:47" pubdate>
+          2022年8月6日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          103 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">json标记文件批量转化黑白mask</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p><strong>环境:</strong> Ubuntu 20.04 LTS下Conda部署的Python 3.10环境<br><strong>软件:</strong> labelme v5.0.1<br><strong>文件</strong> 已有<code>example.png</code>和<code>example.json</code>文件，</p>
+<h1 id="转换效果"><a href="#转换效果" class="headerlink" title="转换效果"></a>转换效果</h1><p>原本labelme自带的json_to_dataset.py只能一次转换出一个文件的黑红遮罩，文件是放在文件夹中，不太方便用于训练（一般是黑白的遮罩）。修改后调用批量脚本可以实现黑白遮罩的批量转换：<br><code>example.json</code>和<code>example.png</code>所在目录下会新建<code>mask</code>文件夹,<code>mask</code>内会生成<code>example_GT.png</code>的黑白遮罩文件。<br>如有多组<code>*.json</code>和<code>*.png</code>则在<code>mask</code>内会生成所有的黑白遮罩文件</p>
+<h2 id="转换后的目录结构"><a href="#转换后的目录结构" class="headerlink" title="转换后的目录结构"></a>转换后的目录结构</h2><ul>
+<li>example&#x2F;  </li>
+<li><ul>
+<li>example.json</li>
+</ul>
+</li>
+<li><ul>
+<li>example.png</li>
+</ul>
+</li>
+<li><ul>
+<li>example1.json</li>
+</ul>
+</li>
+<li><ul>
+<li>example1.png</li>
+</ul>
+</li>
+<li><ul>
+<li>mask&#x2F;</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>example_GT.png</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><ul>
+<li><ul>
+<li>example1_GT.png</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="安装labelme-v5-0-1"><a href="#安装labelme-v5-0-1" class="headerlink" title="安装labelme v5.0.1"></a>安装labelme v5.0.1</h1><p>按照官方的Anaconda教程进行</p>
+<h2 id="创建labelme虚拟环境"><a href="#创建labelme虚拟环境" class="headerlink" title="创建labelme虚拟环境"></a>创建labelme虚拟环境</h2><p>conda新建环境，命名为labelme:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda create --name=labelme python=3.10<br></code></pre></td></tr></table></figure>
+<p>激活labelme虚拟环境:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">conda activate labelme<br></code></pre></td></tr></table></figure>
+<p>使用pip安装labelme：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install labelme<br></code></pre></td></tr></table></figure>
+<h1 id="json文件概览"><a href="#json文件概览" class="headerlink" title="json文件概览"></a>json文件概览</h1><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;4.5.7&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;flags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;shapes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;abnormal&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//label下面的类别abnormal</span><br>      <span class="hljs-attr">&quot;points&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">[</span><br>          <span class="hljs-number">3.2645502645502518</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-number">251.32275132275132</span><br>        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">[</span><br>          <span class="hljs-number">19.62433862433858</span><span class="hljs-punctuation">,</span><br>          <span class="hljs-number">34.6190476190476</span><br>        <span class="hljs-punctuation">]</span><br>      <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;group_id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;shape_type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;rectangle&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;flags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;imagePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;test.png&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//对应png文件</span><br>  <span class="hljs-attr">&quot;imageData&quot;</span><span class="hljs-punctuation">:</span>  <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span> <span class="hljs-comment">//null则需要test.png也在同一个目录</span><br>  <span class="hljs-attr">&quot;imageHeight&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">512</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;imageWidth&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">512</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<div class="note note-success">
+            <p>需要注意：<br>1.test.json文件中的<code>&quot;label&quot;:&quot;abnormal&quot;</code>，此处只有一种标记的类别<code>abnormal</code>。某些json也有可能有多种标记。<br>2.如果是<code>&quot;imageData&quot;</code>的值是<code>null</code>，则需要将test.png也放在test.json的相同目录下。</p>
+          </div>
+<h1 id="修改labelme相关文件"><a href="#修改labelme相关文件" class="headerlink" title="修改labelme相关文件"></a>修改labelme相关文件</h1><h2 id="修改labelme的json-to-dataset-py"><a href="#修改labelme的json-to-dataset-py" class="headerlink" title="修改labelme的json_to_dataset.py"></a>修改labelme的json_to_dataset.py</h2><p>该文件的路径为<code>~/anaconda3/envs/labelme/lib/python3.10/site-packages/labelme/cli/json_to_dataset.py</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/anaconda3/envs/labelme/lib/python3.10/site-packages/labelme/cli/<br><span class="hljs-built_in">cp</span> json_to_dataset.py json_to_dataset.py_backup <span class="hljs-comment">#备份原始的json_to_dataset.py文件</span><br></code></pre></td></tr></table></figure>
+<p>编辑json_to_dataset.py文件，修改以下几处地方：<br>1.将原始代码8行位置的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> PIL.Image<br></code></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#import PIL.Image #后面会不用这个功能，所以注释掉</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-08-06/json_to_dataset_change1.png" srcset="/img/loading.gif" lazyload></p>
+<p>2.将原代码31行位置的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">out_dir = osp.basename(json_file).replace(<span class="hljs-string">&quot;.&quot;</span>, <span class="hljs-string">&quot;_&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">out_dir = osp.basename(json_file).replace(<span class="hljs-string">&quot;.json&quot;</span>, <span class="hljs-string">&quot;_GT&quot;</span>) <span class="hljs-comment">#让临时文件夹与图片名相同并添加`_GT`后缀</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-08-06/json_to_dataset_change2.png" srcset="/img/loading.gif" lazyload></p>
+<p>3.将原代码49行位置的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">label_name_to_value = &#123;<span class="hljs-string">&quot;_background_&quot;</span>: <span class="hljs-number">0</span>&#125;<br></code></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">label_name_to_value = &#123;<span class="hljs-string">&quot;_background_&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;abnormal&quot;</span>: <span class="hljs-number">1</span>&#125; <span class="hljs-comment">#添加为对应的abnormal类别</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-08-06/json_to_dataset_change3.png" srcset="/img/loading.gif" lazyload></p>
+<p>4.将原代码69-75行位置的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">PIL.Image.fromarray(img).save(osp.join(out_dir, <span class="hljs-string">&quot;img.png&quot;</span>))<br>utils.lblsave(osp.join(out_dir, <span class="hljs-string">&quot;label.png&quot;</span>), lbl)<br>PIL.Image.fromarray(lbl_viz).save(osp.join(out_dir, <span class="hljs-string">&quot;label_viz.png&quot;</span>))<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(osp.join(out_dir, <span class="hljs-string">&quot;label_names.txt&quot;</span>), <span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-keyword">as</span> f:<br>    <span class="hljs-keyword">for</span> lbl_name <span class="hljs-keyword">in</span> label_names:<br>        f.write(lbl_name + <span class="hljs-string">&quot;\n&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># PIL.Image.fromarray(img).save(osp.join(out_dir, &quot;img.png&quot;)) # 注释掉不需要的文件</span><br>utils.lblsave(osp.join(<span class="hljs-string">&#x27;./mask&#x27;</span>, <span class="hljs-built_in">str</span>(os.path.basename(out_dir))+<span class="hljs-string">&quot;.png&quot;</span>), lbl) <span class="hljs-comment"># 修改输出的文件名为和&quot;图片名_GT.png&quot;和输出路径为mask</span><br><span class="hljs-comment"># PIL.Image.fromarray(lbl_viz).save(osp.join(out_dir, &quot;label_viz.png&quot;))</span><br><br><span class="hljs-comment"># with open(osp.join(out_dir, &quot;label_names.txt&quot;), &quot;w&quot;) as f:</span><br><span class="hljs-comment">#     for lbl_name in label_names:</span><br><span class="hljs-comment">#         f.write(lbl_name + &quot;\n&quot;)</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="/img/2022-08-06/json_to_dataset_change45.png" srcset="/img/loading.gif" lazyload></p>
+<p>5.在原代码77行下方位置添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">os.rmdir(out_dir) <span class="hljs-comment">#删除原本生成的json同名的文件夹</span><br></code></pre></td></tr></table></figure>
+
+<p>最终修改的的<code>json_to_dataset.py</code>如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> argparse<br><span class="hljs-keyword">import</span> base64<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> os<br><span class="hljs-keyword">import</span> os.path <span class="hljs-keyword">as</span> osp<br><br><span class="hljs-keyword">import</span> imgviz<br><span class="hljs-comment"># import PIL.Image #后面会不用这个功能，所以注释掉</span><br><br><span class="hljs-keyword">from</span> labelme.logger <span class="hljs-keyword">import</span> logger<br><span class="hljs-keyword">from</span> labelme <span class="hljs-keyword">import</span> utils<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    logger.warning(<br>        <span class="hljs-string">&quot;This script is aimed to demonstrate how to convert the &quot;</span><br>        <span class="hljs-string">&quot;JSON file to a single image dataset.&quot;</span><br>    )<br>    logger.warning(<br>        <span class="hljs-string">&quot;It won&#x27;t handle multiple JSON files to generate a &quot;</span><br>        <span class="hljs-string">&quot;real-use dataset.&quot;</span><br>    )<br><br>    parser = argparse.ArgumentParser()<br>    parser.add_argument(<span class="hljs-string">&quot;json_file&quot;</span>)<br>    parser.add_argument(<span class="hljs-string">&quot;-o&quot;</span>, <span class="hljs-string">&quot;--out&quot;</span>, default=<span class="hljs-literal">None</span>)<br>    args = parser.parse_args()<br><br>    json_file = args.json_file<br><br>    <span class="hljs-keyword">if</span> args.out <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        out_dir = osp.basename(json_file).replace(<span class="hljs-string">&quot;.json&quot;</span>, <span class="hljs-string">&quot;_GT&quot;</span>) <span class="hljs-comment">#让临时文件夹与图片名相同并添加`_GT`后缀</span><br>        out_dir = osp.join(osp.dirname(json_file), out_dir)<br>    <span class="hljs-keyword">else</span>:<br>        out_dir = args.out<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> osp.exists(out_dir):<br>        os.mkdir(out_dir)<br><br>    data = json.load(<span class="hljs-built_in">open</span>(json_file))<br>    imageData = data.get(<span class="hljs-string">&quot;imageData&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> imageData:<br>        imagePath = os.path.join(os.path.dirname(json_file), data[<span class="hljs-string">&quot;imagePath&quot;</span>])<br>        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(imagePath, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> f:<br>            imageData = f.read()<br>            imageData = base64.b64encode(imageData).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)<br>    img = utils.img_b64_to_arr(imageData)<br><br>    label_name_to_value = &#123;<span class="hljs-string">&quot;_background_&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;abnormal&quot;</span>: <span class="hljs-number">1</span>&#125; <span class="hljs-comment">#添加为对应的abnormal类别</span><br>    <span class="hljs-keyword">for</span> shape <span class="hljs-keyword">in</span> <span class="hljs-built_in">sorted</span>(data[<span class="hljs-string">&quot;shapes&quot;</span>], key=<span class="hljs-keyword">lambda</span> x: x[<span class="hljs-string">&quot;label&quot;</span>]):<br>        label_name = shape[<span class="hljs-string">&quot;label&quot;</span>]<br>        <span class="hljs-keyword">if</span> label_name <span class="hljs-keyword">in</span> label_name_to_value:<br>            label_value = label_name_to_value[label_name]<br>        <span class="hljs-keyword">else</span>:<br>            label_value = <span class="hljs-built_in">len</span>(label_name_to_value)<br>            label_name_to_value[label_name] = label_value<br>    lbl, _ = utils.shapes_to_label(<br>        img.shape, data[<span class="hljs-string">&quot;shapes&quot;</span>], label_name_to_value<br>    )<br><br>    label_names = [<span class="hljs-literal">None</span>] * (<span class="hljs-built_in">max</span>(label_name_to_value.values()) + <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">for</span> name, value <span class="hljs-keyword">in</span> label_name_to_value.items():<br>        label_names[value] = name<br><br>    lbl_viz = imgviz.label2rgb(<br>        lbl, imgviz.asgray(img), label_names=label_names, loc=<span class="hljs-string">&quot;rb&quot;</span><br>    )<br><br>    <span class="hljs-comment"># PIL.Image.fromarray(img).save(osp.join(out_dir, &quot;img.png&quot;)) # 注释掉不需要的文件</span><br>    utils.lblsave(osp.join(<span class="hljs-string">&#x27;./mask&#x27;</span>, <span class="hljs-built_in">str</span>(os.path.basename(out_dir))+<span class="hljs-string">&quot;.png&quot;</span>), lbl) <span class="hljs-comment"># 修改输出的文件名为和&quot;图片名_GT.png&quot;和输出路径为mask</span><br>    <span class="hljs-comment"># PIL.Image.fromarray(lbl_viz).save(osp.join(out_dir, &quot;label_viz.png&quot;))</span><br><br>    <span class="hljs-comment"># with open(osp.join(out_dir, &quot;label_names.txt&quot;), &quot;w&quot;) as f:</span><br>    <span class="hljs-comment">#     for lbl_name in label_names:</span><br>    <span class="hljs-comment">#         f.write(lbl_name + &quot;\n&quot;)</span><br>    <br>    logger.info(<span class="hljs-string">&quot;Saved to: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(out_dir))<br>    os.rmdir(out_dir) <span class="hljs-comment">#删除原本生成的json同名的文件夹</span><br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:<br>    main()<br></code></pre></td></tr></table></figure>
+<h2 id="修改labelme调用的label-py"><a href="#修改labelme调用的label-py" class="headerlink" title="修改labelme调用的label.py"></a>修改labelme调用的label.py</h2><p>新版的labelme和旧版不同，其直接调用imgviz的<code>label.py</code>进行标记。修改该文件可以对标记区域的颜色进行调整，该文件的路径为<code>~/anaconda3/envs/labelme/lib/python3.10/site-packages/imgviz/label.py</code>  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/anaconda3/envs/labelme/lib/python3.10/site-packages/imgviz/<br><span class="hljs-built_in">cp</span> label.py label.py_backup <span class="hljs-comment">#备份原始的label.py文件</span><br></code></pre></td></tr></table></figure>
+<p>编辑label.py文件，在原代码46行下方位置添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br></pre></td><td class="code"><pre><code class="hljs python">    r[<span class="hljs-number">0</span>],g[<span class="hljs-number">0</span>],b[<span class="hljs-number">0</span>]=(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>) <span class="hljs-comment">#对应默认的back_ground</span><br>    r[<span class="hljs-number">1</span>],g[<span class="hljs-number">1</span>],b[<span class="hljs-number">1</span>]=(<span class="hljs-number">255</span>,<span class="hljs-number">255</span>,<span class="hljs-number">255</span>) <span class="hljs-comment">#对应被标注的类别1, abnormal</span><br>    <span class="hljs-comment"># r[2],g[2],b[2]=(255,0,0) #对应被标注的类别2</span><br>    <span class="hljs-comment"># r[3],g[3],b[3]=(0,255,255) #对应被标注的类别3</span><br>    <span class="hljs-comment"># r[4],g[4],b[4]=(255,0,255) #对应被标注的类别4</span><br>```  <br><br>![](/img/<span class="hljs-number">2022</span>-08-06/label_change.png)<br><br>最终修改的的`json_to_dataset.py`如下：<br>```python<br><span class="hljs-keyword">import</span> numbers<br><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> color <span class="hljs-keyword">as</span> color_module<br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> draw <span class="hljs-keyword">as</span> draw_module<br><span class="hljs-keyword">from</span> . <span class="hljs-keyword">import</span> utils<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">label_colormap</span>(<span class="hljs-params">n_label=<span class="hljs-number">256</span>, value=<span class="hljs-literal">None</span></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Label colormap.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Parameters</span><br><span class="hljs-string">    ----------</span><br><span class="hljs-string">    n_labels: int</span><br><span class="hljs-string">        Number of labels (default: 256).</span><br><span class="hljs-string">    value: float or int</span><br><span class="hljs-string">        Value scale or value of label color in HSV space.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Returns</span><br><span class="hljs-string">    -------</span><br><span class="hljs-string">    cmap: numpy.ndarray, (N, 3), numpy.uint8</span><br><span class="hljs-string">        Label id to colormap.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">bitget</span>(<span class="hljs-params">byteval, idx</span>):<br>        shape = byteval.shape + (<span class="hljs-number">8</span>,)<br>        <span class="hljs-keyword">return</span> np.unpackbits(byteval).reshape(shape)[..., -<span class="hljs-number">1</span> - idx]<br><br>    i = np.arange(n_label, dtype=np.uint8)<br>    r = np.full_like(i, <span class="hljs-number">0</span>)<br>    g = np.full_like(i, <span class="hljs-number">0</span>)<br>    b = np.full_like(i, <span class="hljs-number">0</span>)<br><br>    i = np.repeat(i[:, <span class="hljs-literal">None</span>], <span class="hljs-number">8</span>, axis=<span class="hljs-number">1</span>)<br>    i = np.right_shift(i, np.arange(<span class="hljs-number">0</span>, <span class="hljs-number">24</span>, <span class="hljs-number">3</span>)).astype(np.uint8)<br>    j = np.arange(<span class="hljs-number">8</span>)[::-<span class="hljs-number">1</span>]<br>    r = np.bitwise_or.reduce(np.left_shift(bitget(i, <span class="hljs-number">0</span>), j), axis=<span class="hljs-number">1</span>)<br>    g = np.bitwise_or.reduce(np.left_shift(bitget(i, <span class="hljs-number">1</span>), j), axis=<span class="hljs-number">1</span>)<br>    b = np.bitwise_or.reduce(np.left_shift(bitget(i, <span class="hljs-number">2</span>), j), axis=<span class="hljs-number">1</span>)<br><br>    r[<span class="hljs-number">0</span>],g[<span class="hljs-number">0</span>],b[<span class="hljs-number">0</span>]=(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>) <span class="hljs-comment">#对应默认的back_ground</span><br>    r[<span class="hljs-number">1</span>],g[<span class="hljs-number">1</span>],b[<span class="hljs-number">1</span>]=(<span class="hljs-number">255</span>,<span class="hljs-number">255</span>,<span class="hljs-number">255</span>) <span class="hljs-comment">#对应被标注的类别1, abnormal</span><br><br>    cmap = np.stack((r, g, b), axis=<span class="hljs-number">1</span>).astype(np.uint8)<br><br>    <span class="hljs-keyword">if</span> value <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>        hsv = color_module.rgb2hsv(cmap.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">3</span>))<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(value, <span class="hljs-built_in">float</span>):<br>            hsv[:, <span class="hljs-number">1</span>:, <span class="hljs-number">2</span>] = hsv[:, <span class="hljs-number">1</span>:, <span class="hljs-number">2</span>].astype(<span class="hljs-built_in">float</span>) * value<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">assert</span> <span class="hljs-built_in">isinstance</span>(value, <span class="hljs-built_in">int</span>)<br>            hsv[:, <span class="hljs-number">1</span>:, <span class="hljs-number">2</span>] = value<br>        cmap = color_module.hsv2rgb(hsv).reshape(-<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>    <span class="hljs-keyword">return</span> cmap<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">label2rgb</span>(<span class="hljs-params"></span><br><span class="hljs-params">    label,</span><br><span class="hljs-params">    image=<span class="hljs-literal">None</span>,</span><br><span class="hljs-params">    alpha=<span class="hljs-number">0.5</span>,</span><br><span class="hljs-params">    label_names=<span class="hljs-literal">None</span>,</span><br><span class="hljs-params">    font_size=<span class="hljs-number">30</span>,</span><br><span class="hljs-params">    thresh_suppress=<span class="hljs-number">0</span>,</span><br><span class="hljs-params">    colormap=<span class="hljs-literal">None</span>,</span><br><span class="hljs-params">    loc=<span class="hljs-string">&quot;rb&quot;</span>,</span><br><span class="hljs-params">    font_path=<span class="hljs-literal">None</span>,</span><br><span class="hljs-params"></span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Convert label to rgb.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Parameters</span><br><span class="hljs-string">    ----------</span><br><span class="hljs-string">    label: numpy.ndarray, (H, W), int</span><br><span class="hljs-string">        Label image.</span><br><span class="hljs-string">    image: numpy.ndarray, (H, W, 3), numpy.uint8</span><br><span class="hljs-string">        RGB image.</span><br><span class="hljs-string">    alpha: float, or list or dict of float</span><br><span class="hljs-string">        Alpha of RGB (default: 0.5).</span><br><span class="hljs-string">        If given as a list or dict, it is treated as alpha for each class</span><br><span class="hljs-string">        according to the index or key.</span><br><span class="hljs-string">    label_names: list or dict of string</span><br><span class="hljs-string">        Label id to label name.</span><br><span class="hljs-string">    font_size: int</span><br><span class="hljs-string">        Font size (default: 30).</span><br><span class="hljs-string">    thresh_suppress: float</span><br><span class="hljs-string">        Threshold of label ratio in the label image.</span><br><span class="hljs-string">    colormap: numpy.ndarray, (M, 3), numpy.uint8</span><br><span class="hljs-string">        Label id to color.</span><br><span class="hljs-string">        By default, :func:`~imgviz.label_colormap` is used.</span><br><span class="hljs-string">    loc: string</span><br><span class="hljs-string">        Location of legend (default: &#x27;rb&#x27;).</span><br><span class="hljs-string">        &#x27;centroid&#x27;, &#x27;lt&#x27; and &#x27;rb&#x27; are supported.</span><br><span class="hljs-string">    font_path: str</span><br><span class="hljs-string">        Font path.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    Returns</span><br><span class="hljs-string">    -------</span><br><span class="hljs-string">    res: numpy.ndarray, (H, W, 3), numpy.uint8</span><br><span class="hljs-string">        Visualized image.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> colormap <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        colormap = label_colormap()<br><br>    res = colormap[label]<br><br>    random_state = np.random.RandomState(seed=<span class="hljs-number">1234</span>)<br><br>    mask_unlabeled = label &lt; <span class="hljs-number">0</span><br>    res[mask_unlabeled] = random_state.rand(*(mask_unlabeled.<span class="hljs-built_in">sum</span>(), <span class="hljs-number">3</span>)) * <span class="hljs-number">255</span><br><br>    unique_labels = np.unique(label)<br>    max_label_id = unique_labels[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(alpha, numbers.Number):<br>        alpha = np.array([alpha <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(max_label_id + <span class="hljs-number">1</span>)])<br>    <span class="hljs-keyword">elif</span> <span class="hljs-built_in">isinstance</span>(alpha, <span class="hljs-built_in">dict</span>):<br>        alpha = np.array([alpha.get(l, <span class="hljs-number">0.5</span>) <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(max_label_id + <span class="hljs-number">1</span>)])<br>    <span class="hljs-keyword">else</span>:<br>        alpha = np.asarray(alpha)<br>        <span class="hljs-keyword">assert</span> alpha.ndim == <span class="hljs-number">1</span><br>    <span class="hljs-keyword">assert</span> ((<span class="hljs-number">0</span> &lt;= alpha) &amp; (alpha &lt;= <span class="hljs-number">1</span>)).<span class="hljs-built_in">all</span>()<br>    alpha = alpha[label][:, :, <span class="hljs-literal">None</span>]<br><br>    <span class="hljs-keyword">if</span> image <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">if</span> image.ndim == <span class="hljs-number">2</span>:<br>            image = color_module.gray2rgb(image)<br>        res = (<span class="hljs-number">1</span> - alpha) * image.astype(<span class="hljs-built_in">float</span>) + alpha * res.astype(<span class="hljs-built_in">float</span>)<br>        res = np.clip(res.<span class="hljs-built_in">round</span>(), <span class="hljs-number">0</span>, <span class="hljs-number">255</span>).astype(np.uint8)<br><br>    <span class="hljs-keyword">if</span> label_names <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>        <span class="hljs-keyword">return</span> res<br><br>    unique_labels = unique_labels[unique_labels != -<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(label_names, <span class="hljs-built_in">dict</span>):<br>        unique_labels = [l <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> unique_labels <span class="hljs-keyword">if</span> label_names.get(l)]<br>    <span class="hljs-keyword">else</span>:<br>        unique_labels = [l <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> unique_labels <span class="hljs-keyword">if</span> label_names[l]]<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(unique_labels) == <span class="hljs-number">0</span>:<br>        <span class="hljs-keyword">return</span> res<br><br>    <span class="hljs-keyword">if</span> loc == <span class="hljs-string">&quot;centroid&quot;</span>:<br>        res = utils.numpy_to_pillow(res)<br>        <span class="hljs-keyword">for</span> label_i <span class="hljs-keyword">in</span> unique_labels:<br>            mask = label == label_i<br>            <span class="hljs-keyword">if</span> <span class="hljs-number">1.0</span> * mask.<span class="hljs-built_in">sum</span>() / mask.size &lt; thresh_suppress:<br>                <span class="hljs-keyword">continue</span><br>            y, x = np.array(_center_of_mass(mask), dtype=<span class="hljs-built_in">int</span>)<br><br>            <span class="hljs-keyword">if</span> label[y, x] != label_i:<br>                Y, X = np.where(mask)<br>                point_index = np.random.randint(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(Y))<br>                y, x = Y[point_index], X[point_index]<br><br>            text = label_names[label_i]<br>            height, width = draw_module.text_size(<br>                text, size=font_size, font_path=font_path<br>            )<br>            color = color_module.get_fg_color(res.getpixel((x, y)))<br>            draw_module.text_(<br>                res,<br>                yx=(y - height // <span class="hljs-number">2</span>, x - width // <span class="hljs-number">2</span>),<br>                text=text,<br>                color=color,<br>                size=font_size,<br>                font_path=font_path,<br>            )<br>    <span class="hljs-keyword">elif</span> loc <span class="hljs-keyword">in</span> [<span class="hljs-string">&quot;rb&quot;</span>, <span class="hljs-string">&quot;lt&quot;</span>]:<br>        text_sizes = np.array(<br>            [<br>                draw_module.text_size(<br>                    label_names[l], font_size, font_path=font_path<br>                )<br>                <span class="hljs-keyword">for</span> l <span class="hljs-keyword">in</span> unique_labels<br>            ]<br>        )<br>        text_height, text_width = text_sizes.<span class="hljs-built_in">max</span>(axis=<span class="hljs-number">0</span>)<br>        legend_height = text_height * <span class="hljs-built_in">len</span>(unique_labels) + <span class="hljs-number">5</span><br>        legend_width = text_width + <span class="hljs-number">20</span> + (text_height - <span class="hljs-number">10</span>)<br><br>        height, width = label.shape[:<span class="hljs-number">2</span>]<br>        <span class="hljs-keyword">if</span> loc == <span class="hljs-string">&quot;rb&quot;</span>:<br>            aabb2 = np.array([height - <span class="hljs-number">5</span>, width - <span class="hljs-number">5</span>], dtype=<span class="hljs-built_in">float</span>)<br>            aabb1 = aabb2 - (legend_height, legend_width)<br>        <span class="hljs-keyword">elif</span> loc == <span class="hljs-string">&quot;lt&quot;</span>:<br>            aabb1 = np.array([<span class="hljs-number">5</span>, <span class="hljs-number">5</span>], dtype=<span class="hljs-built_in">float</span>)<br>            aabb2 = aabb1 + (legend_height, legend_width)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;unexpected loc: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(loc))<br><br>        alpha = <span class="hljs-number">0.5</span><br>        y1, x1 = aabb1.<span class="hljs-built_in">round</span>().astype(<span class="hljs-built_in">int</span>)<br>        y2, x2 = aabb2.<span class="hljs-built_in">round</span>().astype(<span class="hljs-built_in">int</span>)<br>        res[y1:y2, x1:x2] = alpha * res[y1:y2, x1:x2] + alpha * <span class="hljs-number">255</span><br><br>        res = utils.numpy_to_pillow(res)<br>        <span class="hljs-keyword">for</span> i, l <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(unique_labels):<br>            box_aabb1 = aabb1 + (i * text_height + <span class="hljs-number">5</span>, <span class="hljs-number">5</span>)<br>            box_aabb2 = box_aabb1 + (text_height - <span class="hljs-number">10</span>, text_height - <span class="hljs-number">10</span>)<br>            draw_module.rectangle_(<br>                res, aabb1=box_aabb1, aabb2=box_aabb2, fill=colormap[l]<br>            )<br>            draw_module.text_(<br>                res,<br>                yx=aabb1 + (i * text_height, <span class="hljs-number">10</span> + (text_height - <span class="hljs-number">10</span>)),<br>                text=label_names[l],<br>                size=font_size,<br>                font_path=font_path,<br>            )<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;unsupported loc: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(loc))<br><br>    <span class="hljs-keyword">return</span> utils.pillow_to_numpy(res)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">_center_of_mass</span>(<span class="hljs-params">mask</span>):<br>    <span class="hljs-keyword">assert</span> mask.ndim == <span class="hljs-number">2</span> <span class="hljs-keyword">and</span> mask.dtype == <span class="hljs-built_in">bool</span><br>    mask = <span class="hljs-number">1.0</span> * mask / mask.<span class="hljs-built_in">sum</span>()<br>    dx = np.<span class="hljs-built_in">sum</span>(mask, <span class="hljs-number">0</span>)<br>    dy = np.<span class="hljs-built_in">sum</span>(mask, <span class="hljs-number">1</span>)<br>    cx = np.<span class="hljs-built_in">sum</span>(dx * np.arange(mask.shape[<span class="hljs-number">1</span>]))<br>    cy = np.<span class="hljs-built_in">sum</span>(dy * np.arange(mask.shape[<span class="hljs-number">0</span>]))<br>    <span class="hljs-keyword">return</span> cy, cx<br></code></pre></td></tr></table></figure>
+<h1 id="创建批量bash脚本"><a href="#创建批量bash脚本" class="headerlink" title="创建批量bash脚本"></a>创建批量bash脚本</h1><p>新建<code>json2mask.sh</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">mkdir</span> ./mask <span class="hljs-comment">#也可手动将./修改成json和png所在的目录路径</span><br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> ./*.json <span class="hljs-comment">#也可手将./修改成json和png所在的目录路劲g</span><br><span class="hljs-keyword">do</span><br>   labelme_json_to_dataset <span class="hljs-variable">$file</span><br><span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+<p>可以直接将<code>json2mask.sh</code>保存在<code>example.json</code>标记文件所在的目录下，在labelme的conda环境下运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sh json2mask.sh<br></code></pre></td></tr></table></figure>
+<p>即可完成标记文件批量的转换</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/wkentaro/labelme#anaconda">(GitHub) labelme: Image Polygonal Annotation with Python</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://chowdera.com/2022/117/202204290443463482.html">2021-08-02 convert JSON files into mask in batch and generate train Txt path make_ path. py (chowdera.com)</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/HeiSeXingYe/article/details/123546167"> labelme显示中文图例和控制类别的mask颜色_HeiSeXingYe的博客</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://icode.best/i/69645141185615">python批量删除文件名中的下划线-代码详解-爱代码爱编程 (icode.best)</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39924674/article/details/110322777">python获取当前文件夹名称_在Python中获取文件的文件夹名称_weixin_39924674的博客</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/suibianshen2012/article/details/84303647">python 删除文件夹、删除非空文件夹_suibianshen2012的博客</a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23489303/article/details/78062697">shell命令批量处理文件_张晶新的博客</a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57004792/what-is-imagedata-in-json-file-which-comes-from-labelme-tool">data annotations - What is imageData in JSON file which comes from labelme tool? - Stack Overflow</a>
+<a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" class="category-chain-item">软件技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/">#Python</a>
+      
+        <a href="/tags/Conda/">#Conda</a>
+      
+        <a href="/tags/Labelme/">#Labelme</a>
+      
+        <a href="/tags/Json/">#Json</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>json标记文件批量转化黑白mask</div>
+      <div>https://cellport.top/2022/08/06/44830959eb60/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>lc700x</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年8月6日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/06/2171b54360f8/" title="解决hexo中Latex报错的问题:expected variable end">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">解决hexo中Latex报错的问题:expected variable end</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/25/015f665edc89/" title="CS229机器学习笔记">
+                        <span class="hidden-mobile">CS229机器学习笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      浙ICP备2021030953号-1
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

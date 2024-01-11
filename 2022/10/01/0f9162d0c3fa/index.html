@@ -1,0 +1,742 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/default.png">
+  <link rel="icon" href="/img/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="lc700x">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="通过Windows下的WSL2子系统配置Oracle Linux，并安装Oracle数据库，并用Windows的SQL Developer连接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL2部署Oracle数据库">
+<meta property="og:url" content="https://cellport.top/2022/10/01/0f9162d0c3fa/index.html">
+<meta property="og:site_name" content="lc700x‘s learning blog">
+<meta property="og:description" content="通过Windows下的WSL2子系统配置Oracle Linux，并安装Oracle数据库，并用Windows的SQL Developer连接">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cellport.top/img/2022-10-01/oracle_linux.png">
+<meta property="article:published_time" content="2022-10-01T08:43:20.000Z">
+<meta property="article:modified_time" content="2022-10-01T08:43:20.000Z">
+<meta property="article:author" content="lc700x">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="WSL">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cellport.top/img/2022-10-01/oracle_linux.png">
+  
+  
+  
+  <title>WSL2部署Oracle数据库 - lc700x‘s learning blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cellport.top","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>学习中lc700x</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/tech.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.5)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="WSL2部署Oracle数据库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-01 16:43" pubdate>
+          2022年10月1日
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WSL2部署Oracle数据库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="需求概述"><a href="#需求概述" class="headerlink" title="需求概述"></a>需求概述</h1><p>最近需要学习下SQL数据库编程，但由于公司的<code>Windows 10</code>电脑上没有最高的管理员权限，我无法直接安装Windows版本的Oracle数据库，因此曲线救国：通过下载<code>Oracle Linux</code>在子系统上安装Linux版本的<code>Oracle XE 18c Database</code>。这里记录下安装的过程。</p>
+<p><img src="/../img/2022-10-01/install_limit.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="部署WSL2下的Oracle-Linux子系统"><a href="#部署WSL2下的Oracle-Linux子系统" class="headerlink" title="部署WSL2下的Oracle Linux子系统"></a>部署WSL2下的Oracle Linux子系统</h1><h2 id="安装Oracle-Linux"><a href="#安装Oracle-Linux" class="headerlink" title="安装Oracle Linux"></a>安装Oracle Linux</h2><p>打开Microsoft Store，搜索<a target="_blank" rel="noopener" href="https://www.microsoft.com/store/productId/9PGKJC9GPP2S">Oracle Linux</a>安装，我安装的是教新的<code>Oracle Linux 8.6</code>版本。  </p>
+<p><img src="/../img/2022-10-01/oracle_linux_store.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="初始化Oracle-Linux"><a href="#初始化Oracle-Linux" class="headerlink" title="初始化Oracle Linux"></a>初始化Oracle Linux</h2><p>在Windows开始菜单打开<code>Oracle Linux</code>，等待片刻弹出窗口提示设定用户名和密码，注意密码长度必须大于8位，输入后按<code>enter</code>即可</p>
+<h2 id="在本机Windows下通过VSCode连接WSL2下的Oracle-Linux"><a href="#在本机Windows下通过VSCode连接WSL2下的Oracle-Linux" class="headerlink" title="在本机Windows下通过VSCode连接WSL2下的Oracle Linux"></a>在本机Windows下通过VSCode连接WSL2下的Oracle Linux</h2><p>只需要下载Microsoft提供的<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">WSL Extension插件</a>即可自动识别本机的WSL2子系统进行连接。</p>
+<div class="note note-success">
+            <p>对于<code>Oracle Linux 8.6</code>，没有自带<code>tar</code>工具，因此<code>VSCode</code>连接过程可能会报错。需要打开开始菜单的<code>Oracle Linux 8.6</code>手动安装：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum -y install tar<br></code></pre></td></tr></table></figure>
+          </div>
+<h2 id="设置文件交互"><a href="#设置文件交互" class="headerlink" title="设置文件交互"></a>设置文件交互</h2><p>在<code>Windows 10</code>中似乎不会自动在<code>文件资源管理器</code>的<code>网络</code>下出现WSL2的文件系统，需要按<code>win+R</code>在<code>运行</code>里输入以下指令打开：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">\\wsl<span class="hljs-variable">$</span><br></code></pre></td></tr></table></figure>
+<p>子系统文件会出现在<code>网络\wsl$\oracle_linux_8.6</code>下。也可直接在<code>VSCode</code>里进行文件的操作。</p>
+<h1 id="安装Oracle-Database-XE-18c"><a href="#安装Oracle-Database-XE-18c" class="headerlink" title="安装Oracle Database XE 18c"></a>安装Oracle Database XE 18c</h1><h2 id="打开root权限"><a href="#打开root权限" class="headerlink" title="打开root权限"></a>打开root权限</h2><p>打开或用<code>VSCode</code>连接上<code>Oracle Linux 8.6</code>，在终端使用root权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">su -s<br></code></pre></td></tr></table></figure>
+<h2 id="下载安装文件"><a href="#下载安装文件" class="headerlink" title="下载安装文件"></a>下载安装文件</h2><p>在浏览器中打开<a target="_blank" rel="noopener" href="https://www.oracle.com/database/technologies/xe18c-downloads.html">Oracle Database Express Edition (XE) 18c Downloads</a>，下载<code>oracle-database-18c</code>安装文件：<br><code>oracle-database-xe-18c-1.0-1.x86_64.rpm</code>，并保存在<code>Oracle Linux 8.6</code>的用户文件夹内，路径为<code>/home/name/</code>或<code>~/</code>。<br>接着下载<code>oracle-database-preinstall-18c</code>文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl -o oracle-database-preinstall-18c-1.0-1.el6.x86_64.rpm https://yum.oracle.com/repo/OracleLinux/OL6/latest/x86_64/getPackage/oracle-database-preinstall-18c-1.0-1.el6.x86_64.rpm<br></code></pre></td></tr></table></figure>
+<h2 id="进入安装步骤"><a href="#进入安装步骤" class="headerlink" title="进入安装步骤"></a>进入安装步骤</h2><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinl/procedure-installing-oracle-database-xe.html">Oracle官方安装指南</a>是直接安装<code>oracle-database-preinstall-18c</code>： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum -y localinstall oracle-database-preinstall-18c-1.0-1.el6.x86_64.rpm<br></code></pre></td></tr></table></figure>
+<div class="note note-success">
+            <p>由于<code>Oracle Linux 8.6</code>缺少很多软件包和库，运行这一步的时候会出现下面的error，提示缺少<code>compat-libcap1</code>和<code>compat-libstdc++-33</code></p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">Error: </span><br><span class="hljs-keyword"> </span>Problem: conflicting requests <br>  - nothing provides compat-libcap1 needed by oracle-database-preinstall<span class="hljs-string">-18</span>c<span class="hljs-string">-1</span>.0<span class="hljs-string">-1</span>.el6.x86_64 <br>  - nothing provides compat-libstdc++<span class="hljs-string">-33</span> needed by oracle-database-preinstall<span class="hljs-string">-18</span>c<span class="hljs-string">-1</span>.0<span class="hljs-string">-1</span>.el6.x86_64 <br></code></pre></td></tr></table></figure>
+          </div>
+<p>需要安装相关的库，依次运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/compat-libcap1-1.10-7.el7.x86_64.rpm<br>dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/compat-libstdc++-33-3.2.3-72.el7.x86_64.rpm<br>dnf install -y http://mirror.centos.org/centos/7/os/x86_64/Packages/glibc-2.17-317.el7.x86_64.rpm<br></code></pre></td></tr></table></figure>
+<p>再运行原来安装<code>oracle-database-preinstall-18c</code>的指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum -y localinstall oracle-database-preinstall-18c-1.0-1.el6.x86_64.rpm<br></code></pre></td></tr></table></figure>
+<p>完成后，继续安装<code>oracle-database-xe-18c-1.0-1.x86_64.rpm</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum -y localinstall oracle-database-xe-18c-1.0-1.x86_64.rpm<br></code></pre></td></tr></table></figure>
+<p>提示<code>Complete!</code>即可进入下一步。</p>
+<p><img src="/../img/2022-10-01/oracle_install.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="部署数据库"><a href="#部署数据库" class="headerlink" title="部署数据库"></a>部署数据库</h2><p>同样打开root权限：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">su -s<br></code></pre></td></tr></table></figure>
+<p>运行数据库服务配置脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">/etc/init.d/oracle-xe-18c configure<br></code></pre></td></tr></table></figure>
+<p>接着会提示设置数据库<code>SYS, SYSTEM, PDBADMIN</code>这三个管理用户的密码。确认后等待进度慢慢完成，该步骤大概需要10～20分钟，然后会出现数据库的连接信息，后面连接数据库会用到：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">Connect <span class="hljs-built_in">to</span> Oracle Database <span class="hljs-keyword">using</span> <span class="hljs-literal">one</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> connect strings: <br><br>     Pluggable database: :<span class="hljs-number">1539</span>/XEPDB1 <br><br>     Multitenant container database: :<span class="hljs-number">1539</span> <br><br>Use <span class="hljs-keyword">https</span>://localhost:<span class="hljs-number">5500</span>/em <span class="hljs-built_in">to</span> access Oracle Enterprise Manager <span class="hljs-keyword">for</span> Oracle Database XE <br></code></pre></td></tr></table></figure>
+<h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><p>因为需要以内部指令的形式调用<code>SQLPLUS</code>，因此需要设置环境变量。<code>Oracle Database</code>也需要相关的设置。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">nano ​~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>在最后添加这些内容，按<code>ctrl+x</code>然后<code>enter</code>保存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell">export ORACLE_SID=XE <br>export NLS_LANG=AMERICAN_AMERICA.AL32UTF8 <br>export ORACLE_HOME=/opt/oracle/product/18c/dbhomeXE <br>export TNS_ADMIN=$ORACLE_HOME/network/admin <br>export ORAENV_ASK=NO <br>export PATH=$ORACLE_HOME/bin:$PATH <br></code></pre></td></tr></table></figure>
+<p>刷新<code>.bashrc</code>配置文件，使环境变量生效:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">. ~/.bashrc<br></code></pre></td></tr></table></figure>
+<h2 id="设置数据库服务自动启动"><a href="#设置数据库服务自动启动" class="headerlink" title="设置数据库服务自动启动"></a>设置数据库服务自动启动</h2><p>每次打开<code>Oracle Linux 8.6</code>后，都需要运行下面指令以启动服务：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo /etc/init.d/oracle-xe-18c start​  <br></code></pre></td></tr></table></figure>
+<p>为了方便可以设置随<code>Windows 10</code>开机自启动。创建<code>init.wsl</code>脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo nano /etc/init.wsl<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#! /bin/sh </span><br>sudo /etc/init.d/oracle-xe-18c start​<br></code></pre></td></tr></table></figure>
+<p>在Windows 10下，按<code>win+R</code>在<code>运行</code>里输入以下指令打开启动项文件夹：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">​shell:startup​ <br></code></pre></td></tr></table></figure>
+<p>在该文件夹下创建自启动脚本，命名为<code>oracle-start.vps</code>，文本内容如下：</p>
+<figure class="highlight vbs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vbs"><span class="hljs-keyword">Set</span> ws = WScript.<span class="hljs-built_in">CreateObject</span>(<span class="hljs-string">&quot;WScript.Shell&quot;</span>)         <br><span class="hljs-number">2</span>ws.run <span class="hljs-string">&quot;wsl -d Ubuntu-18.04 -u root /etc/init.wsl&quot;</span> <br></code></pre></td></tr></table></figure>
+<h1 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h1><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>可以在<code>Oracle Linux 8.6</code>中运行<code>SQLPLUS</code>连接：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sqlplus sys/syspwd@localhost:1539/XEPDB1 as sysdba<br></code></pre></td></tr></table></figure>
+<p>其中<code>syspwd</code>为部署时候设置的密码，sys用户必须以管理员身份登录所以最后加了<code>as sysdba</code>。</p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>下载<a target="_blank" rel="noopener" href="https://www.oracle.com/database/sqldeveloper/technologies/download/">SQL Developer</a>，并打开</p>
+<ol>
+<li>点击绿色的<code>+</code>按钮</li>
+</ol>
+<p><img src="/../img/2022-10-01/sql_connect.png" srcset="/img/loading.gif" lazyload></p>
+<ol start="2">
+<li>添加连接设置并测试保存</li>
+</ol>
+<p><img src="/../img/2022-10-01/sql_connect_info.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>Name: <code>sys</code></li>
+<li>Username: <code>sys</code></li>
+<li>Password: <code>syspwd</code></li>
+<li>Role:<code>SYSDBA</code></li>
+<li>Hostname: <code>localhost</code></li>
+<li>Service name: <code>xepdb1</code></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.daimajiaoliu.com/daima/569934661d4cc04">Windows中的WSL2（子系统）开机启动配置</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinl/installing-oracle-database-xe.html">Installation Guide for Linux x86-64 | 5.1 Installing Oracle Database XE Using RPM Packages</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/18/xeinl/starting-and-stopping-oracle-database.html">Starting and Stopping Oracle Database</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://community.oracle.com/tech/apps-infra/discussion/4335851/unable-to-install-compat-libcap1-1-10-in-ol8-2#:~:text=dnf%20install%20%2Dy,el7.x86_64.rpm">unable to install compat-libcap1-1.10 in OL8.2 - oracle-tech</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/" class="category-chain-item">软件技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Windows/">#Windows</a>
+      
+        <a href="/tags/WSL/">#WSL</a>
+      
+        <a href="/tags/Linux/">#Linux</a>
+      
+        <a href="/tags/Oracle/">#Oracle</a>
+      
+        <a href="/tags/SQL/">#SQL</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>WSL2部署Oracle数据库</div>
+      <div>https://cellport.top/2022/10/01/0f9162d0c3fa/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>lc700x</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月1日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/02/8551202d6c07/" title="优化SQL Devloper的界面显示大小">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">优化SQL Devloper的界面显示大小</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/25/0b57ea964e57/" title="小狗钱钱：养成优秀品格的7条准则">
+                        <span class="hidden-mobile">小狗钱钱：养成优秀品格的7条准则</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      浙ICP备2021030953号-1
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
