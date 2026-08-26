@@ -5,235 +5,235 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>英爱15日自由行·行程单 v3.1（9/12-9/26）</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background: #f8f9fa; padding: 20px; color: #1e2a3a; }
-  .container { max-width: 1100px; margin: 0 auto; background: white; padding: 40px 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 12px; }
-  h1 { font-size: 28px; border-left: 6px solid #1a73e8; padding-left: 16px; margin-bottom: 6px; }
-  .subhead { color: #5f6b7a; font-size: 16px; margin-bottom: 20px; padding-left: 22px; line-height:1.6; }
-  .badge { display: inline-block; background: #e8f0fe; color: #1a73e8; padding: 4px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; margin: 4px 8px 4px 0; }
-  .badge.green { background:#e6f4ea; color:#137333; }
-  .badge.orange { background:#fef7e0; color:#8a6d00; }
-  .badge.sgd { background:#fff3e0; color:#bf360c; }
-  h2 { font-size: 22px; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e9edf2; }
-  .overview { background:#f1f5f9; padding:14px 18px; border-radius:8px; margin-bottom:18px; line-height:1.8; }
-  .hotel-flow { background:#eef6ff; border:1px solid #d6e8ff; padding:10px 16px; border-radius:8px; margin-top:10px; font-size:14px; }
-  .day-block { background: #fafbfc; border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; border: 1px solid #eef1f4; }
-  .day-title { font-weight: 700; font-size: 18px; color: #1a73e8; display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap:6px; }
-  .day-title small { font-weight: 400; font-size: 14px; color: #4a5a6e; background:#e8f0fe; padding:2px 10px; border-radius:12px; }
-  .day-title .tag { font-size:12px; background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:10px; font-weight:600; }
-  .day-title .tag.new { background:#dcfce7; color:#166534; }
-  .grid-2 { display: grid; grid-template-columns: 100px 1fr; gap: 6px 16px; margin-top: 8px; }
-  .grid-2 .label { font-weight: 600; color: #2c3e50; }
-  .grid-2 .label::after { content: "："; }
-  .grid-2 .value { color: #1e2a3a; line-height:1.7; }
-  .hotel-addr { font-size: 13px; color: #5f6b7a; display: block; margin: 4px 0 6px; }
-  .link-btn { display: inline-block; background: #1a73e8; color: #fff; padding: 3px 12px; border-radius: 14px; text-decoration: none; font-size: 13px; margin: 2px 4px 2px 0; font-weight: 600; }
-  .link-btn:hover { background: #1558b0; }
-  .link-btn.alt { background: #2f9e44; }
-  .map-embed { margin-top: 12px; border-radius: 10px; overflow: hidden; border: 1px solid #e0e4e8; }
-  .map-embed iframe { width: 100%; height: 200px; border: 0; display: block; }
-  .route-box { background:#fff; border:1px dashed #1a73e8; border-radius:8px; padding:10px 14px; margin-top:12px; }
-  .route-box .route-title { font-weight:700; color:#1a73e8; font-size:14px; }
-  .budget-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
-  .budget-table th { background: #1a73e8; color: white; padding: 10px 12px; text-align: left; }
-  .budget-table td { padding: 10px 12px; border-bottom: 1px solid #e0e4e8; vertical-align: top; }
-  .budget-table tr:nth-child(even) { background: #f8f9fc; }
-  .tip-box { background: #f1f5f9; padding: 16px 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #1a73e8; line-height:1.8; }
-  .map-note { background: #fef9e7; padding: 14px 18px; border-radius: 8px; border: 1px solid #f0e6c8; margin-top: 20px; }
-  @media (max-width: 768px) { .container { padding: 14px; } .day-title { flex-direction: column; align-items: flex-start; } .grid-2 { grid-template-columns: 1fr; } .budget-table, .budget-table tbody, .budget-table tr, .budget-table td { display: block; width: 100%; } .budget-table thead { display: none; } .budget-table tr { border: 1px solid #e0e4e8; border-radius: 10px; margin-bottom: 12px; } }
+ * { box-sizing: border-box; margin: 0; padding: 0; }
+ body { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; background: #f8f9fa; padding: 20px; color: #1e2a3a; }
+ .container { max-width: 1100px; margin: 0 auto; background: white; padding: 40px 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-radius: 12px; }
+ h1 { font-size: 28px; border-left: 6px solid #1a73e8; padding-left: 16px; margin-bottom: 6px; }
+ .subhead { color: #5f6b7a; font-size: 16px; margin-bottom: 20px; padding-left: 22px; line-height:1.6; }
+ .badge { display: inline-block; background: #e8f0fe; color: #1a73e8; padding: 4px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; margin: 4px 8px 4px 0; }
+ .badge.green { background:#e6f4ea; color:#137333; }
+ .badge.orange { background:#fef7e0; color:#8a6d00; }
+ .badge.sgd { background:#fff3e0; color:#bf360c; }
+ h2 { font-size: 22px; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e9edf2; }
+ .overview { background:#f1f5f9; padding:14px 18px; border-radius:8px; margin-bottom:18px; line-height:1.8; }
+ .hotel-flow { background:#eef6ff; border:1px solid #d6e8ff; padding:10px 16px; border-radius:8px; margin-top:10px; font-size:14px; }
+ .day-block { background: #fafbfc; border-radius: 10px; padding: 16px 20px; margin-bottom: 18px; border: 1px solid #eef1f4; }
+ .day-title { font-weight: 700; font-size: 18px; color: #1a73e8; display: flex; justify-content: space-between; align-items: center; flex-wrap:wrap; gap:6px; }
+ .day-title small { font-weight: 400; font-size: 14px; color: #4a5a6e; background:#e8f0fe; padding:2px 10px; border-radius:12px; }
+ .day-title .tag { font-size:12px; background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:10px; font-weight:600; }
+ .day-title .tag.new { background:#dcfce7; color:#166534; }
+ .grid-2 { display: grid; grid-template-columns: 100px 1fr; gap: 6px 16px; margin-top: 8px; }
+ .grid-2 .label { font-weight: 600; color: #2c3e50; }
+ .grid-2 .label::after { content: "："; }
+ .grid-2 .value { color: #1e2a3a; line-height:1.7; }
+ .hotel-addr { font-size: 13px; color: #5f6b7a; display: block; margin: 4px 0 6px; }
+ .link-btn { display: inline-block; background: #1a73e8; color: #fff; padding: 3px 12px; border-radius: 14px; text-decoration: none; font-size: 13px; margin: 2px 4px 2px 0; font-weight: 600; }
+ .link-btn:hover { background: #1558b0; }
+ .link-btn.alt { background: #2f9e44; }
+ .map-embed { margin-top: 12px; border-radius: 10px; overflow: hidden; border: 1px solid #e0e4e8; }
+ .map-embed iframe { width: 100%; height: 200px; border: 0; display: block; }
+ .route-box { background:#fff; border:1px dashed #1a73e8; border-radius:8px; padding:10px 14px; margin-top:12px; }
+ .route-box .route-title { font-weight:700; color:#1a73e8; font-size:14px; }
+ .budget-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+ .budget-table th { background: #1a73e8; color: white; padding: 10px 12px; text-align: left; }
+ .budget-table td { padding: 10px 12px; border-bottom: 1px solid #e0e4e8; vertical-align: top; }
+ .budget-table tr:nth-child(even) { background: #f8f9fc; }
+ .tip-box { background: #f1f5f9; padding: 16px 20px; border-radius: 10px; margin: 20px 0; border-left: 4px solid #1a73e8; line-height:1.8; }
+ .map-note { background: #fef9e7; padding: 14px 18px; border-radius: 8px; border: 1px solid #f0e6c8; margin-top: 20px; }
+ @media (max-width: 768px) { .container { padding: 14px; } .day-title { flex-direction: column; align-items: flex-start; } .grid-2 { grid-template-columns: 1fr; } .budget-table, .budget-table tbody, .budget-table tr, .budget-table td { display: block; width: 100%; } .budget-table thead { display: none; } .budget-table tr { border: 1px solid #e0e4e8; border-radius: 10px; margin-bottom: 12px; } }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>🇬🇧🇮🇪 英爱15日自由行 · 行程单 v3.1</h1>
-  <div class="subhead">约克·巴斯·巨石阵·白崖·高地·牛津·剑桥·湖区·曼彻斯特·利物浦·格拉斯哥 全覆盖 · 9/12-9/26</div>
-  <p><span class="badge green">📅 2026年9月12日-26日</span> <span class="badge">⏳ 15天14晚</span> <span class="badge green">🏨 7大基地6次换房</span> <span class="badge orange">🚆 前8天火车渡轮 · Day9-11自驾</span> <span class="badge sgd">💱 全部SGD含Master费</span></p>
+ <h1>🇬🇧🇮🇪 英爱15日自由行 · 行程单 v3.1</h1>
+ <div class="subhead">约克·巴斯·巨石阵·白崖·高地·牛津·剑桥·湖区·曼彻斯特·利物浦·格拉斯哥 全覆盖 · 9/12-9/26</div>
+ <p><span class="badge green">📅 2026年9月12日-26日</span> <span class="badge">⏳ 15天14晚</span> <span class="badge green">🏨 7大基地6次换房</span> <span class="badge orange">🚆 前8天火车渡轮 · Day9-11自驾</span> <span class="badge sgd">💱 全部SGD含Master费</span></p>
 
-  <h2>📌 行程概览</h2>
-  <div class="overview">
-    <strong>路线总览：</strong> 伦敦(2晚) → 白崖 → 约克 → 爱丁堡(3晚, 含高地+格拉斯哥) → 贝尔法斯特(1晚) → 巨人堤 → 都柏林(2晚) → 切斯特取车 → 利物浦/曼彻斯特 → 巴斯(2晚) → 湖区/科茨沃尔德 → 牛津(2晚) → 剑桥 → 伦敦(2晚)<br>
-    <div class="hotel-flow">🏨 <strong>换房节奏（6次，巴斯/Belfast日期锁定）：</strong> 伦敦2晚 → 爱丁堡3晚 → 贝尔法斯特1晚 → 都柏林2晚 → 巴斯2晚 → 牛津2晚 → 伦敦2晚</div>
-  </div>
+ <h2>📌 行程概览</h2>
+ <div class="overview">
+  <strong>路线总览：</strong> 伦敦(2晚) → 白崖 → 约克 → 爱丁堡(3晚, 含高地+格拉斯哥) → 贝尔法斯特(1晚) → 巨人堤 → 都柏林(2晚) → 切斯特取车 → 利物浦/曼彻斯特 → 巴斯(2晚) → 湖区/科茨沃尔德 → 牛津(2晚) → 剑桥 → 伦敦(2晚)<br>
+  <div class="hotel-flow">🏨 <strong>换房节奏（6次，巴斯/Belfast日期锁定）：</strong> 伦敦2晚 → 爱丁堡3晚 → 贝尔法斯特1晚 → 都柏林2晚 → 巴斯2晚 → 牛津2晚 → 伦敦2晚</div>
+ </div>
 
-  <h2>📅 每日行程详情 · 每日附路线图</h2>
+ <h2>📅 每日行程详情 · 每日附路线图</h2>
 
-  <div class="day-block">
-    <div class="day-title">Day 1 · 9/12(六) 抵达伦敦 <small>入住休整</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">北京→伦敦 CA855 12:40-15:55；希斯罗→Coral Street</span><span class="label">行程</span><span class="value">入住Airbnb Coral Street，晚间大本钟/白金汉宫外观</span><span class="label">🏨 酒店</span><span class="value"><strong>Airbnb Coral Street · 154 SGD/晚</strong>（90 GBP≈154 SGD）<br><span class="hotel-addr">📍 Coral Street, SE1 7BA</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Coral+Street,+SE1+7BA,+London" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=Coral+Street,+London+SE1+7BA&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>希斯罗机场 → Coral Street（进城）<br><a class="link-btn" href="https://www.google.com/maps/dir/Heathrow+Airport/Coral+Street,+London+SE1+7BA/" target="_blank">🧭 在Google Maps打开</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Heathrow+Airport+to+Coral+Street+London+SE1+7BA&output=embed" loading="lazy" title="Day1路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 1 · 9/12(六) 抵达伦敦 <small>入住休整</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">北京→伦敦 CA855 12:40-15:55；希斯罗→Coral Street</span><span class="label">行程</span><span class="value">入住Airbnb Coral Street，晚间<a href="https://www.google.com/maps/search/?api=1&query=Big+Ben+London" target="_blank">大本钟 (Big Ben / Elizabeth Tower)</a>/<a href="https://www.google.com/maps/search/?api=1&query=Buckingham+Palace" target="_blank">白金汉宫 (Buckingham Palace)</a>外观</span><span class="label">🏨 酒店</span><span class="value"><strong>Airbnb Coral Street · 154 SGD/晚</strong>（90 GBP≈154 SGD）<br><span class="hotel-addr">📍 Coral Street, SE1 7BA</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Coral+Street,+SE1+7BA,+London" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=Coral+Street,+London+SE1+7BA&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>希斯罗机场 → Coral Street（进城）<br><a class="link-btn" href="https://www.google.com/maps/dir/Heathrow+Airport/Coral+Street,+London+SE1+7BA/" target="_blank">🧭 在Google Maps打开</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Heathrow+Airport+to+Coral+Street+London+SE1+7BA&output=embed" loading="lazy" title="Day1路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 2 · 9/13(日) 伦敦 → 白崖 + 哈利波特 <small>行李留伦敦</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">火车Victoria→Seaford 1.5h + 公交12X至Seven Sisters；周日12X运行</span><span class="label">行程</span><span class="value">上午Seven Sisters白崖徒步；下午哈利波特工厂或大英博物馆</span><span class="label">🏨 酒店</span><span class="value">同Day 1</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London Victoria → Seaford → Seven Sisters Country Park<br><a class="link-btn" href="https://www.google.com/maps/dir/London+Victoria+Station/Seaford/Seven+Sisters+Country+Park/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London+Victoria+Station&daddr=Seaford+Station+to:Seven+Sisters+Country+Park&output=embed" loading="lazy" title="Day2路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 2 · 9/13(日) 伦敦 → 白崖 + 哈利波特 (Harry Potter) <small>行李留伦敦</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">火车Victoria→Seaford 1.5h + 公交12X至Seven Sisters；周日12X运行</span><span class="label">行程</span><span class="value">上午Seven Sisters白崖徒步；下午<a href="https://www.google.com/maps/search/?api=1&query=Warner+Bros+Studio+Tour+London" target="_blank">哈利波特工厂 (Warner Bros. Studio Tour)</a>或<a href="https://www.google.com/maps/search/?api=1&query=British+Museum" target="_blank">大英博物馆 (British Museum)</a></span><span class="label">🏨 酒店</span><span class="value">同Day 1</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London Victoria → Seaford → Seven Sisters Country Park<br><a class="link-btn" href="https://www.google.com/maps/dir/London+Victoria+Station/Seaford/Seven+Sisters+Country+Park/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London+Victoria+Station&daddr=Seaford+Station+to:Seven+Sisters+Country+Park&output=embed" loading="lazy" title="Day2路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 3 · 9/14(一) 伦敦 → 约克 → 爱丁堡 <small>换房</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">King's Cross→约克1h50m；约克→爱丁堡2h30m</span><span class="label">行程</span><span class="value">约克大教堂/城墙/肉铺街/贝蒂茶室/约克大学外景</span><span class="label">🏨 酒店</span><span class="value"><strong>Airbnb Moredun Park Road · 107 SGD/晚</strong><br><span class="hotel-addr">📍 115 Moredun Park Road, EH17 7HJ</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London King's Cross → York → Edinburgh<br><a class="link-btn" href="https://www.google.com/maps/dir/London+King's+Cross/York/Edinburgh+Waverley/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London+King's+Cross&daddr=York+to:Edinburgh&output=embed" loading="lazy" title="Day3路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 3 · 9/14(一) 伦敦 → 约克 → 爱丁堡 <small>换房</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">King's Cross→约克1h50m；约克→爱丁堡2h30m</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=York+Minster" target="_blank">约克大教堂 (York Minster)</a>/城墙/<a href="https://www.google.com/maps/search/?api=1&query=The+Shambles+York" target="_blank">肉铺街 (The Shambles)</a>/贝蒂茶室 (Bettys Cafe Tea Rooms)/<a href="https://www.google.com/maps/search/?api=1&query=University+of+York" target="_blank">约克大学 (University of York)</a>外景</span><span class="label">🏨 酒店</span><span class="value"><strong>Airbnb Moredun Park Road · 107 SGD/晚</strong><br><span class="hotel-addr">📍 115 Moredun Park Road, EH17 7HJ</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London King's Cross → York → Edinburgh<br><a class="link-btn" href="https://www.google.com/maps/dir/London+King's+Cross/York/Edinburgh+Waverley/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London+King's+Cross&daddr=York+to:Edinburgh&output=embed" loading="lazy" title="Day3路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 4 · 9/15(二) 爱丁堡 + 格拉斯哥半日 <small>行李留爱丁堡</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">步行 + 火车爱丁堡→格拉斯哥1h</span><span class="label">行程</span><span class="value">上午皇家英里(大象咖啡馆/博物馆/荷里路德/王子街)；下午格拉斯哥大教堂/大学/现代美术馆GoMA</span><span class="label">🏨 酒店</span><span class="value">同Day 3</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh Castle → Glasgow Cathedral → Glasgow University → GoMA<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh+Castle/Glasgow+Cathedral/Glasgow+University/Gallery+of+Modern+Art+Glasgow/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh+Castle&daddr=Glasgow+Cathedral+to:Glasgow+University&output=embed" loading="lazy" title="Day4路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 4 · 9/15(二) 爱丁堡 + 格拉斯哥半日 <small>行李留爱丁堡</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">步行 + 火车爱丁堡→格拉斯哥1h</span><span class="label">行程</span><span class="value">上午皇家英里(<a href="https://www.google.com/maps/search/?api=1&query=The+Elephant+House+Edinburgh" target="_blank">大象咖啡馆 (The Elephant House)</a>/博物馆/荷里路德/<a href="https://www.google.com/maps/search/?api=1&query=Princes+Street+Edinburgh" target="_blank">王子街 (Princes Street)</a>)；下午<a href="https://www.google.com/maps/search/?api=1&query=Glasgow+Cathedral" target="_blank">格拉斯哥大教堂 (Glasgow Cathedral)</a>/大学/现代美术馆GoMA</span><span class="label">🏨 酒店</span><span class="value">同Day 3</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh Castle → Glasgow Cathedral → Glasgow University → GoMA<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh+Castle/Glasgow+Cathedral/Glasgow+University/Gallery+of+Modern+Art+Glasgow/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh+Castle&daddr=Glasgow+Cathedral+to:Glasgow+University&output=embed" loading="lazy" title="Day4路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 5 · 9/16(三) 高地一日团 <small>行李留爱丁堡</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">Rabbie's 16座小团12h</span><span class="label">行程</span><span class="value">07:00植物园 → Glencoe/尼斯湖 → 卡尔顿山日落</span><span class="label">🏨 酒店</span><span class="value">同Day 3</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh → Glencoe → Loch Ness → Edinburgh<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh/Glencoe/Loch+Ness/Edinburgh/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh&daddr=Glencoe+to:Loch+Ness+to:Edinburgh&output=embed" loading="lazy" title="Day5路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 5 · 9/16(三) 高地一日团 <small>行李留爱丁堡</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">Rabbie's 16座小团12h</span><span class="label">行程</span><span class="value">07:00<a href="https://www.google.com/maps/search/?api=1&query=Royal+Botanic+Garden+Edinburgh" target="_blank">植物园 (Royal Botanic Garden)</a> → Glencoe/尼斯湖 → <a href="https://www.google.com/maps/search/?api=1&query=Calton+Hill+Edinburgh" target="_blank">卡尔顿山 (Calton Hill)</a>日落</span><span class="label">🏨 酒店</span><span class="value">同Day 3</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh → Glencoe → Loch Ness → Edinburgh<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh/Glencoe/Loch+Ness/Edinburgh/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh&daddr=Glencoe+to:Loch+Ness+to:Edinburgh&output=embed" loading="lazy" title="Day5路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 6 · 9/17(四) 爱丁堡 → 贝尔法斯特 <small>换房锁定</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">爱丁堡→凯恩莱恩2.5h；渡轮2.5h</span><span class="label">行程</span><span class="value">下午抵达EasyHotel Belfast</span><span class="label">🏨 酒店</span><span class="value"><strong>EasyHotel Belfast · 131 SGD/晚</strong><br><span class="hotel-addr">📍 Belfast City Centre</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=EasyHotel+Belfast" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=EasyHotel+Belfast&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh → Cairnryan → Belfast<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh/Cairnryan/Belfast/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh&daddr=Cairnryan+to:Belfast&output=embed" loading="lazy" title="Day6路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 6 · 9/17(四) 爱丁堡 → 贝尔法斯特 <small>换房锁定</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">爱丁堡→凯恩莱恩2.5h；渡轮2.5h</span><span class="label">行程</span><span class="value">下午抵达EasyHotel Belfast</span><span class="label">🏨 酒店</span><span class="value"><strong>EasyHotel Belfast · 131 SGD/晚</strong><br><span class="hotel-addr">📍 Belfast City Centre</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=EasyHotel+Belfast" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=EasyHotel+Belfast&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Edinburgh → Cairnryan → Belfast<br><a class="link-btn" href="https://www.google.com/maps/dir/Edinburgh/Cairnryan/Belfast/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Edinburgh&daddr=Cairnryan+to:Belfast&output=embed" loading="lazy" title="Day6路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 7 · 9/18(五) 贝尔法斯特 → 巨人堤 → 都柏林 <small>换房</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">贝尔法斯特→巨人堤1.5h；巨人堤→都柏林2.5-3h</span><span class="label">行程</span><span class="value">上午巨人堤；下午都柏林</span><span class="label">🏨 酒店</span><span class="value"><strong>130 SGD/晚 · 靠近Finglas West Church</strong><br><span class="hotel-addr">📍 Finglas West, Dublin 11</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Finglas+West+Church,+Dublin+11" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=Finglas+West+Church,+Dublin+11&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Belfast → Giant's Causeway → Dublin<br><a class="link-btn" href="https://www.google.com/maps/dir/Belfast/Giant's+Causeway/Dublin/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Belfast&daddr=Giant's+Causeway+to:Dublin&output=embed" loading="lazy" title="Day7路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 7 · 9/18(五) 贝尔法斯特 → 巨人堤 → 都柏林 <small>换房</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">贝尔法斯特→巨人堤1.5h；巨人堤→都柏林2.5-3h</span><span class="label">行程</span><span class="value">上午巨人堤；下午都柏林</span><span class="label">🏨 酒店</span><span class="value"><strong>130 SGD/晚 · 靠近Finglas West Church</strong><br><span class="hotel-addr">📍 Finglas West, Dublin 11</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Finglas+West+Church,+Dublin+11" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=Finglas+West+Church,+Dublin+11&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Belfast → Giant's Causeway → Dublin<br><a class="link-btn" href="https://www.google.com/maps/dir/Belfast/Giant's+Causeway/Dublin/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Belfast&daddr=Giant's+Causeway+to:Dublin&output=embed" loading="lazy" title="Day7路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 8 · 9/19(六) 都柏林市区游 <small>行李留都柏林</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">步行/轻轨</span><span class="label">行程</span><span class="value">圣三一学院、梅林广场、健力士啤酒馆</span><span class="label">🏨 酒店</span><span class="value">同Day 7</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>都柏林市区步行（Trinity College周边）<br><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Trinity+College+Dublin" target="_blank">🧭 打开地图</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Trinity+College+Dublin&output=embed" loading="lazy" title="Day8路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 8 · 9/19(六) 都柏林市区游 <small>行李留都柏林</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">步行/轻轨</span><span class="label">行程</span><span class="value">圣三一学院、梅林广场、健力士啤酒馆</span><span class="label">🏨 酒店</span><span class="value">同Day 7</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>都柏林市区步行（Trinity College周边）<br><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Trinity+College+Dublin" target="_blank">🧭 打开地图</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Trinity+College+Dublin&output=embed" loading="lazy" title="Day8路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 9 · 9/20(日⚠️) 切斯特取车 → 利物浦/曼彻斯特 → 巴斯 <small>换房锁定</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">渡轮散客票08:10-11:50；火车至切斯特取车 → 利物浦40分→曼彻斯特1h→巴斯3h</span><span class="label">行程</span><span class="value">利物浦阿尔伯特码头/披头士雕像；曼彻斯特大学/大教堂/老特拉福德外景</span><span class="label">🏨 酒店</span><span class="value"><strong>Old Mill Hotel & Lodge · 130 SGD/晚</strong><br><span class="hotel-addr">📍 Old Mill Hotel & Lodge, Bath</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Old+Mill+Hotel+%26+Lodge,+Bath" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=Old+Mill+Hotel+%26+Lodge,+Bath&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Dublin → Holyhead → Chester → Liverpool → Manchester → Bath<br><a class="link-btn" href="https://www.google.com/maps/dir/Dublin/Holyhead/Chester/Liverpool/Manchester/Bath/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Dublin&daddr=Holyhead+to:Chester+to:Liverpool+to:Manchester+to:Bath&output=embed" loading="lazy" title="Day9路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 9 · 9/20(日⚠️) 切斯特取车 → 利物浦/曼彻斯特 → 巴斯 <small>换房锁定</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">渡轮散客票08:10-11:50；火车至切斯特取车 → 利物浦40分→曼彻斯特1h→巴斯3h</span><span class="label">行程</span><span class="value">利物浦<a href="https://www.google.com/maps/search/?api=1&query=Albert+Dock+Liverpool" target="_blank">阿尔伯特码头 (Albert Dock)</a>/<a href="https://www.google.com/maps/search/?api=1&query=The+Beatles+Statue+Liverpool" target="_blank">披头士雕像 (The Beatles Statue)</a>；<a href="https://www.google.com/maps/search/?api=1&query=University+of+Manchester" target="_blank">曼彻斯特大学 (University of Manchester)</a>/大教堂/<a href="https://www.google.com/maps/search/?api=1&query=Old+Trafford" target="_blank">老特拉福德 (Old Trafford)</a>外景</span><span class="label">🏨 酒店</span><span class="value"><strong>Old Mill Hotel & Lodge · 130 SGD/晚</strong><br><span class="hotel-addr">📍 Old Mill Hotel & Lodge, Bath</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Old+Mill+Hotel+%26+Lodge,+Bath" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=Old+Mill+Hotel+%26+Lodge,+Bath&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Dublin → Holyhead → Chester → Liverpool → Manchester → Bath<br><a class="link-btn" href="https://www.google.com/maps/dir/Dublin/Holyhead/Chester/Liverpool/Manchester/Bath/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Dublin&daddr=Holyhead+to:Chester+to:Liverpool+to:Manchester+to:Bath&output=embed" loading="lazy" title="Day9路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 10 · 9/21(一) 巴斯 + 巨石阵 <small>行李留巴斯</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">自驾巴斯↔巨石阵1h</span><span class="label">行程</span><span class="value">古罗马浴场→普尔特尼三拱桥→皇家新月楼；下午巨石阵</span><span class="label">🏨 酒店</span><span class="value">同Day 9</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Bath → Stonehenge → Bath<br><a class="link-btn" href="https://www.google.com/maps/dir/Bath/Stonehenge/Bath/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Bath&daddr=Stonehenge+to:Bath&output=embed" loading="lazy" title="Day10路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 10 · 9/21(一) 巴斯 + 巨石阵 <small>行李留巴斯</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">自驾巴斯↔巨石阵1h</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=Roman+Baths+Bath" target="_blank">古罗马浴场 (Roman Baths)</a>→<a href="https://www.google.com/maps/search/?api=1&query=Pulteney+Bridge+Bath" target="_blank">普尔特尼三拱桥 (Pulteney Bridge)</a>→<a href="https://www.google.com/maps/search/?api=1&query=Royal+Crescent+Bath" target="_blank">皇家新月楼 (Royal Crescent)</a>；下午巨石阵</span><span class="label">🏨 酒店</span><span class="value">同Day 9</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Bath → Stonehenge → Bath<br><a class="link-btn" href="https://www.google.com/maps/dir/Bath/Stonehenge/Bath/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Bath&daddr=Stonehenge+to:Bath&output=embed" loading="lazy" title="Day10路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 11 · 9/22(二) 巴斯 → 科茨沃尔德 → 湖区 → 牛津 <small>换房</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">自驾巴斯→科茨沃尔德1.5h→湖区2.5h→牛津2h</span><span class="label">行程</span><span class="value">拜伯里/水上伯顿→百老汇→温德米尔游船+彼得兔博物馆</span><span class="label">🏨 酒店</span><span class="value">Oxford City Centre · 约140 SGD/晚<br><span class="hotel-addr">📍 Oxford OX1</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+Oxford+City+Centre" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="map-embed"><iframe src="https://www.google.com/maps?q=Oxford+University&output=embed" loading="lazy"></iframe></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Bath → Bibury → Bourton-on-the-Water → Windermere → Oxford<br><a class="link-btn" href="https://www.google.com/maps/dir/Bath/Bibury/Bourton-on-the-Water/Windermere/Oxford/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Bath&daddr=Bibury+to:Bourton-on-the-Water+to:Windermere+to:Oxford&output=embed" loading="lazy" title="Day11路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 11 · 9/22(二) 巴斯 → 科茨沃尔德 → 湖区 → 牛津 <small>换房</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">自驾巴斯→科茨沃尔德1.5h→湖区2.5h→牛津2h</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=Bibury" target="_blank">拜伯里 (Bibury)</a>/<a href="https://www.google.com/maps/search/?api=1&query=Bourton-on-the-Water" target="_blank">水上伯顿 (Bourton-on-the-Water)</a>→<a href="https://www.google.com/maps/search/?api=1&query=Broadway+Cotswolds" target="_blank">百老汇 (Broadway)</a>→温德米尔游船+<a href="https://www.google.com/maps/search/?api=1&query=The+World+of+Beatrix+Potter+Attraction+Bowness" target="_blank">彼得兔博物馆 (The World of Beatrix Potter Attraction)</a></span><span class="label">🏨 酒店</span><span class="value">Oxford City Centre · 约140 SGD/晚<br><span class="hotel-addr">📍 Oxford OX1</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+Oxford+City+Centre" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="map-embed"><iframe src="https://www.google.com/maps?q=Oxford+University&output=embed" loading="lazy"></iframe></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Bath → Bibury → Bourton-on-the-Water → Windermere → Oxford<br><a class="link-btn" href="https://www.google.com/maps/dir/Bath/Bibury/Bourton-on-the-Water/Windermere/Oxford/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Bath&daddr=Bibury+to:Bourton-on-the-Water+to:Windermere+to:Oxford&output=embed" loading="lazy" title="Day11路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 12 · 9/23(三) 牛津深度游 <small>行李留牛津</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">步行</span><span class="label">行程</span><span class="value">基督教堂学院入内、博德利图书馆、叹息桥</span><span class="label">🏨 酒店</span><span class="value">同Day 11</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>牛津大学城步行<br><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Oxford+University" target="_blank">🧭 打开地图</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Oxford+University&output=embed" loading="lazy" title="Day12路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 12 · 9/23(三) 牛津深度游 <small>行李留牛津</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">步行</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=Christ+Church+Oxford" target="_blank">基督教堂学院 (Christ Church)</a>入内、<a href="https://www.google.com/maps/search/?api=1&query=Bodleian+Library+Oxford" target="_blank">博德利图书馆 (Bodleian Library)</a>、叹息桥</span><span class="label">🏨 酒店</span><span class="value">同Day 11</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span><a href="https://www.google.com/maps/search/?api=1&query=University+of+Oxford" target="_blank">牛津大学 (University of Oxford)</a>城步行<br><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Oxford+University" target="_blank">🧭 打开地图</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Oxford+University&output=embed" loading="lazy" title="Day12路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 13 · 9/24(四) 牛津 → 剑桥 → 伦敦 <small>换房</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">牛津→剑桥2.5h；剑桥→伦敦1h</span><span class="label">行程</span><span class="value">剑桥大学/国王学院/牛顿苹果树/康河撑蒿</span><span class="label">🏨 酒店</span><span class="value">Premier Inn Heathrow · 约125 SGD/晚<br><span class="hotel-addr">📍 15 Bath Road, TW6 2AB</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+London+Heathrow+Airport+Bath+Road" target="_blank">🗺️ Google Maps</a></span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Oxford → Cambridge → London Heathrow<br><a class="link-btn" href="https://www.google.com/maps/dir/Oxford/Cambridge/London+Heathrow/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Oxford&daddr=Cambridge+to:London+Heathrow&output=embed" loading="lazy" title="Day13路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 13 · 9/24(四) 牛津 → 剑桥 → 伦敦 <small>换房</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">牛津→剑桥2.5h；剑桥→伦敦1h</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=University+of+Cambridge" target="_blank">剑桥大学 (University of Cambridge)</a>/<a href="https://www.google.com/maps/search/?api=1&query=King%27s+College+Cambridge" target="_blank">国王学院 (King's College)</a>/<a href="https://www.google.com/maps/search/?api=1&query=Newton%27s+Apple+Tree+Trinity+College+Cambridge" target="_blank">牛顿苹果树 (Newton's Apple Tree)</a>/康河撑蒿 (Punting)</span><span class="label">🏨 酒店</span><span class="value">Premier Inn Heathrow · 约125 SGD/晚<br><span class="hotel-addr">📍 15 Bath Road, TW6 2AB</span><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+London+Heathrow+Airport+Bath+Road" target="_blank">🗺️ Google Maps</a></span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>Oxford → Cambridge → London Heathrow<br><a class="link-btn" href="https://www.google.com/maps/dir/Oxford/Cambridge/London+Heathrow/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=Oxford&daddr=Cambridge+to:London+Heathrow&output=embed" loading="lazy" title="Day13路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 14 · 9/25(五) 伦敦市区游 <small>行李留伦敦</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">地铁/巴士</span><span class="label">行程</span><span class="value">温莎城堡/大英博物馆/白金汉宫/大本钟补漏</span><span class="label">🏨 酒店</span><span class="value">同Day 13</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London → Windsor Castle → London<br><a class="link-btn" href="https://www.google.com/maps/dir/London/Windsor+Castle/London/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London&daddr=Windsor+Castle+to:London&output=embed" loading="lazy" title="Day14路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 14 · 9/25(五) 伦敦市区游 <small>行李留伦敦</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">地铁/巴士</span><span class="label">行程</span><span class="value"><a href="https://www.google.com/maps/search/?api=1&query=Windsor+Castle" target="_blank">温莎城堡 (Windsor Castle)</a>/<a href="https://www.google.com/maps/search/?api=1&query=British+Museum" target="_blank">大英博物馆 (British Museum)</a>/<a href="https://www.google.com/maps/search/?api=1&query=Buckingham+Palace" target="_blank">白金汉宫 (Buckingham Palace)</a>/<a href="https://www.google.com/maps/search/?api=1&query=Big+Ben+London" target="_blank">大本钟 (Big Ben / Elizabeth Tower)</a>补漏</span><span class="label">🏨 酒店</span><span class="value">同Day 13</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London → Windsor Castle → London<br><a class="link-btn" href="https://www.google.com/maps/dir/London/Windsor+Castle/London/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London&daddr=Windsor+Castle+to:London&output=embed" loading="lazy" title="Day14路线"></iframe></div></div>
+ </div>
 
-  <div class="day-block">
-    <div class="day-title">Day 15 · 9/26(六) 伦敦 → 回国 <small>15:00起飞</small></div>
-    <div class="grid-2"><span class="label">交通</span><span class="value">Heathrow Express/地铁至希斯罗；15:00起飞</span><span class="label">行程</span><span class="value">12:00前到机场退税</span><span class="label">🏨 酒店</span><span class="value">飞机上</span></div>
-    <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London → Heathrow Airport<br><a class="link-btn" href="https://www.google.com/maps/dir/London/Heathrow+Airport/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Heathrow+Airport&output=embed" loading="lazy" title="Day15路线"></iframe></div></div>
-  </div>
+ <div class="day-block">
+  <div class="day-title">Day 15 · 9/26(六) 伦敦 → 回国 <small>15:00起飞</small></div>
+  <div class="grid-2"><span class="label">交通</span><span class="value">Heathrow Express/地铁至希斯罗；15:00起飞</span><span class="label">行程</span><span class="value">12:00前到机场退税</span><span class="label">🏨 酒店</span><span class="value">飞机上</span></div>
+  <div class="route-box"><span class="route-title">🗺️ 当日路线：</span>London → Heathrow Airport<br><a class="link-btn" href="https://www.google.com/maps/dir/London/Heathrow+Airport/" target="_blank">🧭 打开路线</a><div class="map-embed"><iframe src="https://www.google.com/maps?q=Heathrow+Airport&output=embed" loading="lazy" title="Day15路线"></iframe></div></div>
+ </div>
 
-  <h2>🏨 酒店总结（7大基地 · 6次换房 · 全部SGD含Master费）</h2>
-  <table class="budget-table">
-    <thead><tr><th>基地</th><th>天数</th><th>酒店</th><th>参考价(SGD)</th><th>地图</th></tr></thead>
-    <tbody>
-      <tr><td><strong>伦敦·市中心</strong></td><td>Day1-2·2晚</td><td>Airbnb Coral Street</td><td>154×2=308</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Coral+Street,+SE1+7BA,+London" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>爱丁堡·南区</strong></td><td>Day3-5·3晚</td><td>Airbnb Moredun Park Road</td><td>107×3=321</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>贝尔法斯特</strong></td><td>Day6·1晚</td><td>EasyHotel Belfast</td><td>131</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=EasyHotel+Belfast" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>都柏林·Finglas</strong></td><td>Day7-8·2晚</td><td>近Finglas West Church</td><td>130×2=260</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Finglas+West+Church,+Dublin+11" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>巴斯</strong></td><td>Day9-10·2晚</td><td>Old Mill Hotel & Lodge</td><td>130×2=260</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Old+Mill+Hotel+%26+Lodge,+Bath" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>牛津</strong></td><td>Day11-12·2晚</td><td>Oxford City Centre</td><td>~140×2=280</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+Oxford+City+Centre" target="_blank">🗺️地图</a></td></tr>
-      <tr><td><strong>伦敦·希斯罗</strong></td><td>Day13-14·2晚</td><td>Premier Inn Heathrow</td><td>~125×2=250</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+London+Heathrow+Airport+Bath+Road" target="_blank">🗺️地图</a></td></tr>
-      <tr><td colspan="2" style="text-align:center;font-weight:700;color:#1a73e8;">合计 14晚</td><td colspan="3" style="font-size:13px;">约1,810 SGD · 全部含Master服务费</td></tr>
-    </tbody>
-  </table>
+ <h2>🏨 酒店总结（7大基地 · 6次换房 · 全部SGD含Master费）</h2>
+ <table class="budget-table">
+  <thead><tr><th>基地</th><th>天数</th><th>酒店</th><th>参考价(SGD)</th><th>地图</th></tr></thead>
+  <tbody>
+   <tr><td><strong>伦敦·市中心</strong></td><td>Day1-2·2晚</td><td>Airbnb Coral Street</td><td>154×2=308</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Coral+Street,+SE1+7BA,+London" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>爱丁堡·南区</strong></td><td>Day3-5·3晚</td><td>Airbnb Moredun Park Road</td><td>107×3=321</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=115+Moredun+Park+Road,+Edinburgh,+EH17+7HJ" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>贝尔法斯特</strong></td><td>Day6·1晚</td><td>EasyHotel Belfast</td><td>131</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=EasyHotel+Belfast" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>都柏林·Finglas</strong></td><td>Day7-8·2晚</td><td>近Finglas West Church</td><td>130×2=260</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Finglas+West+Church,+Dublin+11" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>巴斯</strong></td><td>Day9-10·2晚</td><td>Old Mill Hotel & Lodge</td><td>130×2=260</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Old+Mill+Hotel+%26+Lodge,+Bath" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>牛津</strong></td><td>Day11-12·2晚</td><td>Oxford City Centre</td><td>~140×2=280</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+Oxford+City+Centre" target="_blank">🗺️地图</a></td></tr>
+   <tr><td><strong>伦敦·希斯罗</strong></td><td>Day13-14·2晚</td><td>Premier Inn Heathrow</td><td>~125×2=250</td><td><a class="link-btn" href="https://www.google.com/maps/search/?api=1&query=Premier+Inn+London+Heathrow+Airport+Bath+Road" target="_blank">🗺️地图</a></td></tr>
+   <tr><td colspan="2" style="text-align:center;font-weight:700;color:#1a73e8;">合计 14晚</td><td colspan="3" style="font-size:13px;">约1,810 SGD · 全部含Master服务费</td></tr>
+  </tbody>
+ </table>
 
-  <h2>🚆🚢🚗 交通订票总结（火车 · 渡轮 · 租车）</h2>
-  <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">🚆 火车票（分两种：长途Advance有折扣 / 通勤线固定价）</h3>
-  <table class="budget-table">
-    <thead><tr><th>天数</th><th>路段</th><th>票种</th><th>何时订</th><th>参考价(2人SGD)</th><th>链接</th></tr></thead>
-    <tbody>
-      <tr><td>Day2</td><td>伦敦Victoria↔Seaford(白崖)</td><td>Off-Peak固定价</td><td><span style="color:#137333; font-weight:600;">无需提前</span></td><td>58</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>Day3</td><td>伦敦King's Cross→约克</td><td>Advance Single</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>110</td><td><a class="link-btn" href="https://www.lner.co.uk" target="_blank">LNER</a></td></tr>
-      <tr><td>Day3</td><td>约克→爱丁堡</td><td>Advance Single</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>130</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>Day4</td><td>爱丁堡↔格拉斯哥</td><td>Off-Peak Day Return</td><td>提前1-2天</td><td>35</td><td><a class="link-btn" href="https://www.scotrail.co.uk" target="_blank">ScotRail</a></td></tr>
-      <tr><td>Day6</td><td>爱丁堡→凯恩莱恩</td><td>固定价</td><td>提前3天</td><td>40</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>Day13</td><td>牛津→剑桥</td><td>Advance Single</td><td>本周内</td><td>85</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>Day13</td><td>剑桥→伦敦King's Cross</td><td>Off-Peak Single</td><td>本周内</td><td>45</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>Day14</td><td>伦敦↔温莎</td><td>Day Return固定价</td><td>无需提前</td><td>30</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
-      <tr><td>—</td><td><strong>Two Together Railcard</strong></td><td>年卡</td><td><span style="color:#b3261e; font-weight:600;">立即先买</span></td><td>52</td><td><a class="link-btn" href="https://www.twotogether-railcard.co.uk" target="_blank">官网</a></td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:13px; color:#5f6b7a;">火车合计约450-650 SGD，Advance票早订省40% · Two Together Railcard全程再省1/3</p>
-  <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">⛴️ 渡轮（散客票比车载省£60-120）</h3>
-  <table class="budget-table">
-    <thead><tr><th>天数</th><th>路段</th><th>时长</th><th>何时订</th><th>参考价(2人SGD)</th><th>链接</th></tr></thead>
-    <tbody>
-      <tr><td>Day6</td><td>凯恩莱恩→贝尔法斯特</td><td>Stena Line 2.5h</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>95</td><td><a class="link-btn" href="https://www.stenaline.co.uk" target="_blank">Stena</a></td></tr>
-      <tr><td>Day9</td><td>都柏林→霍利黑德 08:10-11:50</td><td>Irish Ferries/Stena 3.5h</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>90</td><td><a class="link-btn" href="https://www.irishferries.com" target="_blank">Irish Ferries</a></td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:13px; color:#5f6b7a;">渡轮合计约90-140 SGD，两段提前订最便宜</p>
-  <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">🚗 租车（切斯特取·希斯罗还 · Estate旅行版）</h3>
-  <table class="budget-table">
-    <thead><tr><th>天数</th><th>路段</th><th>车型/时长</th><th>何时订</th><th>参考价(SGD)</th><th>链接</th></tr></thead>
-    <tbody>
-      <tr><td>Day9-11</td><td>切斯特(9/20周日)→巴斯→湖区→科茨沃尔德→牛津→希斯罗(9/22)</td><td>Estate旅行版 3天 自动挡全险</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>320-420含油费停车</td><td><a class="link-btn" href="https://www.enterprise.co.uk/en/car-hire/deals/car-hire-save-online.html" target="_blank">Enterprise</a></td></tr>
-    </tbody>
-  </table>
-  <p style="font-size:13px; color:#5f6b7a;">另：国际航班北京⇄伦敦国航直飞10h，Day1 CA855 / Day15 15:00起飞；高地团Rabbie's 12h约170-260 SGD/2人</p>
+ <h2>🚆🚢🚗 交通订票总结（火车 · 渡轮 · 租车）</h2>
+ <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">🚆 火车票（分两种：长途Advance有折扣 / 通勤线固定价）</h3>
+ <table class="budget-table">
+  <thead><tr><th>天数</th><th>路段</th><th>票种</th><th>何时订</th><th>参考价(2人SGD)</th><th>链接</th></tr></thead>
+  <tbody>
+   <tr><td>Day2</td><td>伦敦Victoria↔Seaford(白崖)</td><td>Off-Peak固定价</td><td><span style="color:#137333; font-weight:600;">无需提前</span></td><td>58</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>Day3</td><td>伦敦King's Cross→约克</td><td>Advance Single</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>110</td><td><a class="link-btn" href="https://www.lner.co.uk" target="_blank">LNER</a></td></tr>
+   <tr><td>Day3</td><td>约克→爱丁堡</td><td>Advance Single</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>130</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>Day4</td><td>爱丁堡↔格拉斯哥</td><td>Off-Peak Day Return</td><td>提前1-2天</td><td>35</td><td><a class="link-btn" href="https://www.scotrail.co.uk" target="_blank">ScotRail</a></td></tr>
+   <tr><td>Day6</td><td>爱丁堡→凯恩莱恩</td><td>固定价</td><td>提前3天</td><td>40</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>Day13</td><td>牛津→剑桥</td><td>Advance Single</td><td>本周内</td><td>85</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>Day13</td><td>剑桥→伦敦King's Cross</td><td>Off-Peak Single</td><td>本周内</td><td>45</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>Day14</td><td>伦敦↔温莎</td><td>Day Return固定价</td><td>无需提前</td><td>30</td><td><a class="link-btn" href="https://www.thetrainline.com" target="_blank">Trainline</a></td></tr>
+   <tr><td>—</td><td><strong>Two Together Railcard</strong></td><td>年卡</td><td><span style="color:#b3261e; font-weight:600;">立即先买</span></td><td>52</td><td><a class="link-btn" href="https://www.twotogether-railcard.co.uk" target="_blank">官网</a></td></tr>
+  </tbody>
+ </table>
+ <p style="font-size:13px; color:#5f6b7a;">火车合计约450-650 SGD，Advance票早订省40% · Two Together Railcard全程再省1/3</p>
+ <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">⛴️ 渡轮（散客票比车载省£60-120）</h3>
+ <table class="budget-table">
+  <thead><tr><th>天数</th><th>路段</th><th>时长</th><th>何时订</th><th>参考价(2人SGD)</th><th>链接</th></tr></thead>
+  <tbody>
+   <tr><td>Day6</td><td>凯恩莱恩→贝尔法斯特</td><td>Stena Line 2.5h</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>95</td><td><a class="link-btn" href="https://www.stenaline.co.uk" target="_blank">Stena</a></td></tr>
+   <tr><td>Day9</td><td>都柏林→霍利黑德 08:10-11:50</td><td>Irish Ferries/Stena 3.5h</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>90</td><td><a class="link-btn" href="https://www.irishferries.com" target="_blank">Irish Ferries</a></td></tr>
+  </tbody>
+ </table>
+ <p style="font-size:13px; color:#5f6b7a;">渡轮合计约90-140 SGD，两段提前订最便宜</p>
+ <h3 style="color:#1a73e8; margin:16px 0 8px; font-size:17px;">🚗 租车（切斯特取·希斯罗还 · Estate旅行版）</h3>
+ <table class="budget-table">
+  <thead><tr><th>天数</th><th>路段</th><th>车型/时长</th><th>何时订</th><th>参考价(SGD)</th><th>链接</th></tr></thead>
+  <tbody>
+   <tr><td>Day9-11</td><td>切斯特(9/20周日)→巴斯→湖区→科茨沃尔德→牛津→希斯罗(9/22)</td><td>Estate旅行版 3天 自动挡全险</td><td><span style="color:#b3261e; font-weight:600;">立即</span></td><td>320-420含油费停车</td><td><a class="link-btn" href="https://www.enterprise.co.uk/en/car-hire/deals/car-hire-save-online.html" target="_blank">Enterprise</a></td></tr>
+  </tbody>
+ </table>
+ <p style="font-size:13px; color:#5f6b7a;">另：国际航班北京⇄伦敦国航直飞10h，Day1 CA855 / Day15 15:00起飞；高地团Rabbie's 12h约170-260 SGD/2人</p>
 
-  <h2>⏰ 订票时间表（首日9/12出发）</h2>
-  <table class="budget-table">
-    <thead><tr><th style="width:110px;">优先级</th><th>事项</th><th>说明</th></tr></thead>
-    <tbody>
-      <tr><td>🔴 立即</td><td>国际机票(返程9/26 15:00)·Rabbie's高地团·两段渡轮</td><td>高地团易售罄，渡轮临期涨价</td></tr>
-      <tr><td>🔴 立即</td><td>长途火车Advance票+Two Together Railcard</td><td>越早越便宜</td></tr>
-      <tr><td>🟠 本周内</td><td>租车Estate·巨石阵·凯尔经·大英博物馆·温莎/哈利波特·剑桥国王学院</td><td>Estate紧俏，哈利波特需提前4周</td></tr>
-      <tr><td>🟢 无需提前</td><td>白崖火车票·约克大教堂·巨人堤步道</td><td>白崖无Advance折扣，价格固定</td></tr>
-    </tbody>
-  </table>
+ <h2>⏰ 订票时间表（首日9/12出发）</h2>
+ <table class="budget-table">
+  <thead><tr><th style="width:110px;">优先级</th><th>事项</th><th>说明</th></tr></thead>
+  <tbody>
+   <tr><td>🔴 立即</td><td>国际机票(返程9/26 15:00)·Rabbie's高地团·两段渡轮</td><td>高地团易售罄，渡轮临期涨价</td></tr>
+   <tr><td>🔴 立即</td><td>长途火车Advance票+Two Together Railcard</td><td>越早越便宜</td></tr>
+   <tr><td>🟠 本周内</td><td>租车Estate·巨石阵·凯尔经·<a href="https://www.google.com/maps/search/?api=1&query=British+Museum" target="_blank">大英博物馆 (British Museum)</a>·温莎/哈利波特 (Harry Potter)·剑桥<a href="https://www.google.com/maps/search/?api=1&query=King%27s+College+Cambridge" target="_blank">国王学院 (King's College)</a></td><td>Estate紧俏，哈利波特 (Harry Potter)需提前4周</td></tr>
+   <tr><td>🟢 无需提前</td><td>白崖火车票·<a href="https://www.google.com/maps/search/?api=1&query=York+Minster" target="_blank">约克大教堂 (York Minster)</a>·巨人堤步道</td><td>白崖无Advance折扣，价格固定</td></tr>
+  </tbody>
+ </table>
 
-  <h2>💰 预算估算（SGD，2人，Master费含）</h2>
-  <table class="budget-table">
-    <thead><tr><th>项目</th><th>费用(SGD)</th><th>备注</th></tr></thead>
-    <tbody>
-      <tr><td>住宿14晚</td><td>1,810</td><td>见酒店总结明细</td></tr>
-      <tr><td>火车票</td><td>450-650</td><td>Advance省40%</td></tr>
-      <tr><td>高地团</td><td>170-260</td><td>Rabbie's £48-66/人</td></tr>
-      <tr><td>租车3天</td><td>320-420</td><td>Estate+油费停车</td></tr>
-      <tr><td>渡轮2段</td><td>90-140</td><td>提前订</td></tr>
-      <tr><td>门票</td><td>180-300</td><td>含城堡/巨石阵/大学</td></tr>
-    </tbody>
-  </table>
+ <h2>💰 预算估算（SGD，2人，Master费含）</h2>
+ <table class="budget-table">
+  <thead><tr><th>项目</th><th>费用(SGD)</th><th>备注</th></tr></thead>
+  <tbody>
+   <tr><td>住宿14晚</td><td>1,810</td><td>见酒店总结明细</td></tr>
+   <tr><td>火车票</td><td>450-650</td><td>Advance省40%</td></tr>
+   <tr><td>高地团</td><td>170-260</td><td>Rabbie's £48-66/人</td></tr>
+   <tr><td>租车3天</td><td>320-420</td><td>Estate+油费停车</td></tr>
+   <tr><td>渡轮2段</td><td>90-140</td><td>提前订</td></tr>
+   <tr><td>门票</td><td>180-300</td><td>含城堡/巨石阵/大学</td></tr>
+  </tbody>
+ </table>
 
-  <h2>🗺️ 全程路线总览</h2>
-  <div class="map-note">
-    <strong>全程单向环线：</strong>伦敦 → Seven Sisters → 约克 → 爱丁堡 → Glencoe高地 → 贝尔法斯特 → 巨人堤 → 都柏林 → 巴斯 → 巨石阵 → 牛津 → 剑桥 → 伦敦<br>
-    <a class="link-btn" href="https://www.google.com/maps/dir/London,+UK/Seven+Sisters+Country+Park,+UK/York,+UK/Edinburgh,+UK/Glencoe,+UK/Belfast,+UK/Giant's+Causeway,+UK/Dublin,+Ireland/Bath,+UK/Stonehenge,+UK/Oxford,+UK/Cambridge,+UK/London,+UK/" target="_blank">🧭 在Google Maps打开全程路线</a>
-    <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London%2C+UK&daddr=Seven+Sisters+Country+Park%2C+UK+to%3AYork%2C+UK+to%3AEdinburgh%2C+UK+to%3AGlencoe%2C+UK+to%3ABelfast%2C+UK+to%3AGiant%27s+Causeway%2C+UK+to%3ADublin%2C+Ireland+to%3ABath%2C+UK+to%3AStonehenge%2C+UK+to%3AOxford%2C+UK+to%3ACambridge%2C+UK+to%3ALondon%2C+UK&output=embed" loading="lazy" title="全程路线"></iframe></div>
-  </div>
-  <p style="margin-top:28px; text-align:right; color:#6b7a8a; border-top:1px solid #e9edf2; padding-top:16px;">行程设计 v3.1 · 9/12-9/26 · 全景点已塞入 · 每日路线图已添加 · 巴斯/Belfast日期锁定｜祝您旅途愉快！</p>
+ <h2>🗺️ 全程路线总览</h2>
+ <div class="map-note">
+  <strong>全程单向环线：</strong>伦敦 → Seven Sisters → 约克 → 爱丁堡 → Glencoe高地 → 贝尔法斯特 → 巨人堤 → 都柏林 → 巴斯 → 巨石阵 → 牛津 → 剑桥 → 伦敦<br>
+  <a class="link-btn" href="https://www.google.com/maps/dir/London,+UK/Seven+Sisters+Country+Park,+UK/York,+UK/Edinburgh,+UK/Glencoe,+UK/Belfast,+UK/Giant's+Causeway,+UK/Dublin,+Ireland/Bath,+UK/Stonehenge,+UK/Oxford,+UK/Cambridge,+UK/London,+UK/" target="_blank">🧭 在Google Maps打开全程路线</a>
+  <div class="map-embed"><iframe src="https://maps.google.com/maps?saddr=London%2C+UK&daddr=Seven+Sisters+Country+Park%2C+UK+to%3AYork%2C+UK+to%3AEdinburgh%2C+UK+to%3AGlencoe%2C+UK+to%3ABelfast%2C+UK+to%3AGiant%27s+Causeway%2C+UK+to%3ADublin%2C+Ireland+to%3ABath%2C+UK+to%3AStonehenge%2C+UK+to%3AOxford%2C+UK+to%3ACambridge%2C+UK+to%3ALondon%2C+UK&output=embed" loading="lazy" title="全程路线"></iframe></div>
+ </div>
+ <p style="margin-top:28px; text-align:right; color:#6b7a8a; border-top:1px solid #e9edf2; padding-top:16px;">行程设计 v3.1 · 9/12-9/26 · 全景点已塞入 · 每日路线图已添加 · 巴斯/Belfast日期锁定｜祝您旅途愉快！</p>
 </div>
 </body>
 </html>
